@@ -7,8 +7,14 @@ namespaceBegin(foxintango)
 class foxintangoAPI ELFFile{
 public:
     ELFFile();
+    ELFFile(const char* path);
     ~ELFFile();
 public:
+    int open(const char* path);
+    /**
+     * load to memory 
+     */
+    int load();
     /**
      * 1,类型判断
      * 2,加载数据段
