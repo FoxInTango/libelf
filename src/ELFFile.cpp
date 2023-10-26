@@ -34,6 +34,11 @@ ELFFile::~ELFFile(){}
 
 int ELF::open(const char* path){
     FILE* file = fopen(path,"r");
+
+    if(file){
+        fclose(file);
+        return 1;
+    }
     return 0;
 }
 
