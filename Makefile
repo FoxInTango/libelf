@@ -35,6 +35,7 @@ PROJECT_DIR_BESIDES += -path ./.git
 PROJECT_DIR_BESIDES += -o -path ./obj
 PROJECT_DIR_BESIDES += -o -path ./bin
 PROJECT_DIR_BESIDES += -o -path ./lib
+PROJECT_DIR_BESIDES += -o -path ./elf
 PROJECT_DIR_BESIDES += -o -path ./.trash
 PROJECT_DIR_BESIDES += \)
 PROJECT_DIRS   = $(shell find $(PROJECT_ROOT) $(PROJECT_DIR_BESIDES) -prune -o -type d -print)
