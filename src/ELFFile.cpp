@@ -1,6 +1,13 @@
 #include "ELFFile.h"
+#include "elf.h"
 using namespace foxintango;
 #include <stdio.h>
+
+/**
+ * Linux Ó¦ÓÃ²ã
+ * Linux ÄÚºË²ã
+ * MCU 
+ */
 
 #if defined(STM32F101x6) || defined(STM32F101xB) || defined(STM32F101xE) || defined(STM32F101xG) || \
     defined(STM32F102x6) || defined(STM32F102xB) || \
@@ -19,5 +26,14 @@ using namespace foxintango;
 #endif
 
 ELFFile::ELFFile(){}
+ELFFile::ELFFile(const char* path){
+    open(path);
+}
+
 ELFFile::~ELFFile(){}
+
+int ELF::open(const char* path){
+    FILE* file = fopen(path,"r");
+    return 0;
+}
 
