@@ -32,7 +32,7 @@ ELFFile::ELFFile(const char* path){
 
 ELFFile::~ELFFile(){}
 
-int ELF::open(const char* path){
+int ELFFile::open(const char* path){
     FILE* file = fopen(path,"r");
 
     if(file){
