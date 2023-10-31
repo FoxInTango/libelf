@@ -34,8 +34,21 @@ ELFFile::~ELFFile(){}
 
 int ELFFile::open(const char* path){
     FILE* file = fopen(path,"r");
-
+    char elf_magic[4];
+    char elf_bitwide;
+    char elf_edian;
+    char elf_version;
+    Endian elf_edian;
     if(file){
+        fread(elf_magic,1,4,file);//
+        fread(elf_bitwide,1,1,file);//5
+        fread(elf_edian, 1, 1, file);//6
+        fread(elf_version,1,1,file);
+
+        printf("elf_magic:   %c%c%c%c\n", elf_magic[0], elf_magic[1], elf_magic[2], elf_magic[3]);
+        printf("elf_bitwide: %c\n", elf_bitwide);
+        printf("elf_edian:   %c\n", elf_edian);
+        printf("elf_version: %c\n", elf_version);
         fclose(file);
         return 1;
     }
