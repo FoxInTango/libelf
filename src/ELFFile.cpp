@@ -39,6 +39,7 @@ int ELFFile::open(const char* path){
     char elf_edian;
     char elf_version;
     Endian edian;
+    // ²Î¿¼ https://www.cnblogs.com/jiqingwu/p/elf_explore_2.html
     if(file){
         fread(&elf_magic,1,4,file);//
         fread(&elf_bitwide,1,1,file);//5
