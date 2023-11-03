@@ -55,7 +55,7 @@ $(APP_OBJECTS_PP):%.o:%.cpp
 	$(CC) ${PPFLAGS} $< -o $@
 
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
-	$(CC) -o $@ $^ ${LDFLAGS} -fPIC -shared -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${APP_MAP_EXT}
+	$(CC) -fPIC -shared -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${APP_MAP_EXT}
 
 $(LIB_A_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS} $< -o $@
