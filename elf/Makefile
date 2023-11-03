@@ -34,7 +34,7 @@ $(APP_OBJECTS_CC):%.o:%.c
 $(APP_OBJECTS_PP):%.o:%.cpp
 	$(CC) ${PPFLAGS} $< -o $@
 
-${OUT_DIR}/${APP_OUT_NAME}.${APP_LST_EXT}
+${OUT_DIR}/${APP_OUT_NAME}.${APP_LST_EXT}:
 	arm-none-eabi-objdump -h -S ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} > ${OUT_DIR}/${APP_OUT_NAME}.${APP_LST_EXT}
 
 clean   :
