@@ -76,7 +76,7 @@ $(LIB_B_OBJECTS_PP):%.o:%.cpp
 ${OUT_DIR}/${APP_OUT_NAME}.${APP_LST_EXT}:
 	arm-none-eabi-objdump -x -r -t -s -S -C ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} > ${OUT_DIR}/${APP_OUT_NAME}.${APP_LST_EXT}
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_LST_EXT}:
-	arm-none-eabi-objdump -x -r-t -s -S -C ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_A_NAME}.${LIB_LST_EXT}
+	arm-none-eabi-objdump -x -r -t -s -S -C ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_A_NAME}.${LIB_LST_EXT}
 ${OUT_DIR}/${LIB_B_NAME}.${LIB_LST_EXT}:
 	arm-none-eabi-objdump -x -r -t -s -S -C ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_B_NAME}.${LIB_LST_EXT}
 clean   :
