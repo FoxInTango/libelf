@@ -5,8 +5,10 @@ LD=arm-none-eabi-ld
 
 OUT_DIR := ./out
 
-CCFLAGS = -c -fPIC -Wall -fvisibility=hidden
-PPFLAGS = -c -fPIC -Wall -fvisibility=hidden -std=c++11
+#CCFLAGS = -c -fPIC -Wall -fvisibility=hidden
+#PPFLAGS = -c -fPIC -Wall -fvisibility=hidden -std=c++11
+CCFLAGS = -c -fPIC -Wall -fvisibility=hidden -std=c++11 -I./include
+PPFLAGS = -c -fPIC -Wall -fvisibility=hidden -std=c++11 -I./include
 LDFLAGS = 
 
 # app
