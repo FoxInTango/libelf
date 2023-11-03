@@ -15,7 +15,7 @@ int sub(){
 
 int div() {
     a = 2;
-    return a;
+    return 0;
 }
 /*
  arm-none-eabi-g++ -c -fPIC -Wall -fvisibility=hidden -std=c++11 -o liba/share.o liba/share.cpp
