@@ -7,8 +7,8 @@ OUT_DIR := ./out
 
 #CCFLAGS = -c -fPIC -Wall -fvisibility=hidden
 #PPFLAGS = -c -fPIC -Wall -fvisibility=hidden -std=c++11
-CCFLAGS = -c -fPIC -Wall -fvisibility=hidden -std=c++11 -I./include
-PPFLAGS = -c -fPIC -Wall -fvisibility=hidden -std=c++11 -I./include
+CCFLAGS = -c -fPIC -Wall -fvisibility=hidden
+PPFLAGS = -c -fPIC -Wall -fvisibility=hidden -std=c++11
 LDFLAGS = 
 
 # app
@@ -44,9 +44,7 @@ LIB_B_OBJECTS_CC  += $(patsubst %.c,%.o,$(LIB_B_SOURCES_CC))
 LIB_B_SOURCES_PP  += ${LIB_B_SRC_DIR}/share.cpp
 LIB_B_OBJECTS_PP  += $(patsubst %.cpp,%.o,$(LIB_B_SOURCES_PP))
 
-ALL : ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} ${OUT_DIR}/${APP_OUT_NAME}.${APP_LST_EXT} \
-      ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_LST_EXT}    \
-	  ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_B_NAME}.${LIB_LST_EXT}
+ALL : ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} ${OUT_DIR}/${APP_OUT_NAME}.${APP_LST_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_LST_EXT} ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_B_NAME}.${LIB_LST_EXT}
 	
 ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} ${OUT_DIR}/${APP_OUT_NAME}.${APP_MAP_EXT}:$(APP_OBJECTS_PP) $(APP_OBJECTS_CC)
 	$(CC) -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${APP_OUT_NAME}.${APP_MAP_EXT}
@@ -57,7 +55,7 @@ $(APP_OBJECTS_PP):%.o:%.cpp
 	$(CC) ${PPFLAGS} $< -o $@
 
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
-	$(CC) -fPIC -shared -lstdc++ -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${APP_MAP_EXT}
+	$(CC) -fPIC -shared -lstdc++ -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}
 
 $(LIB_A_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS} $< -o $@
@@ -65,7 +63,7 @@ $(LIB_A_OBJECTS_PP):%.o:%.cpp
 	$(CC) ${PPFLAGS} $< -o $@
 
 ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT}:$(LIB_B_OBJECTS_PP) $(LIB_B_OBJECTS_CC)
-	$(CC) -fPIC -shared -lstdc++ -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${APP_MAP_EXT}
+	$(CC) -fPIC -shared -lstdc++ -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT}
 
 $(LIB_B_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS} $< -o $@
