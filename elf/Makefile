@@ -13,9 +13,9 @@ APP_OUT_NAME = app
 APP_OUT_EXT  = elf
 APP_MAP_EXT  = map
 APP_SRC_DIR  =./app
-APP_SOURCES_CC  += ${APP_SRC_DIR}/*.c
+APP_SOURCES_CC  += ${APP_SRC_DIR}/syscalls.c ${APP_SRC_DIR}/sysmem.c
 APP_OBJECTS_CC  += $(patsubst %.cpp,%.o,$(TARGET_SOURCES_PP))
-APP_SOURCES_PP  += ${APP_SRC_DIR}/*.cpp
+APP_SOURCES_PP  += ${APP_SRC_DIR}/main.cpp
 APP_OBJECTS_PP  += $(patsubst %.cpp,%.o,$(TARGET_SOURCES_PP))
 
 LIB_A_SRC_DIR=./liba
