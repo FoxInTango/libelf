@@ -1,4 +1,4 @@
-CC=arm-none-eabi-g++
+CC=arm-none-eabi-gcc
 AS=arm-none-eabi-as
 AR=arm-none-eabi-ar
 LD=arm-none-eabi-ld
