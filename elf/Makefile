@@ -55,7 +55,8 @@ $(APP_OBJECTS_PP):%.o:%.cpp
 	$(CC) ${PPFLAGS} $< -o $@
 
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
-	$(LD) -fPIC -shared -lstdc++ -o $@ $^ ${LDFLAGS} #-Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}
+	@echo ${LIB_A_OBJECTS_PP}
+	$(CC) -fPIC -shared -lstdc++ -o $@ $^ ${LDFLAGS} #-Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}
 
 $(LIB_A_OBJECTS_CC):%.o:%.c
 	arm-none-eabi-gcc -c -fPIC -Wall -fvisibility=hidden -std=c++11 $< -o $@ # $(CC) ${CCFLAGS} $< -o $@
