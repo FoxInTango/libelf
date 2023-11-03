@@ -31,3 +31,6 @@ $(APP_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS} $< -o $@
 $(APP_OBJECTS_PP):%.o:%.cpp
 	$(CC) ${PPFLAGS} $< -o $@
+
+clean   :
+	rm -rf ./out/*
