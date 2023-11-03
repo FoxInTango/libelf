@@ -15,9 +15,9 @@ APP_MAP_EXT  = map
 APP_SRC_DIR  =./app
 APP_SOURCES_CC  += ${APP_SRC_DIR}/syscalls.c
 APP_SOURCES_CC  += ${APP_SRC_DIR}/sysmem.c
-APP_OBJECTS_CC  += $(patsubst %.c,%.o,$(TARGET_SOURCES_CC))
+APP_OBJECTS_CC  += $(patsubst %.c,%.o,$(APP_SOURCES_CC))
 APP_SOURCES_PP  += ${APP_SRC_DIR}/main.cpp
-APP_OBJECTS_PP  += $(patsubst %.cpp,%.o,$(TARGET_SOURCES_PP))
+APP_OBJECTS_PP  += $(patsubst %.cpp,%.o,$(APP_SOURCES_PP))
 
 LIB_A_SRC_DIR=./liba
 LIB_B_SRC_DIR=./libb
