@@ -58,7 +58,7 @@ ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}
 	$(LD) -fPIC -shared -lstdc++ -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}
 
 $(LIB_A_OBJECTS_CC):%.o:%.c
-	$(CC) ${CCFLAGS} $< -o $@
+	arm-none-eabi-g++ -c -fPIC -Wall -fvisibility=hidden -std=c++11 $< -o $@ # $(CC) ${CCFLAGS} $< -o $@
 $(LIB_A_OBJECTS_PP):%.o:%.cpp
 	$(CC) ${PPFLAGS} $< -o $@
 
