@@ -75,10 +75,10 @@ ${OUT_DIR}/${APP_OUT_NAME}.${APP_LST_EXT}:
 	arm-none-eabi-objdump -h -S ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_A_NAME}.${LIB_LST_EXT}
 	arm-none-eabi-objdump -h -S ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_B_NAME}.${LIB_LST_EXT}
 clean   :
-	rm -rf ./out/*
-	rm -f $(APP_OBJECTS_CC)
-	rm -f $(APP_OBJECTS_PP)
-	rm -f $(LIB_A_OBJECTS_CC)
-	rm -f $(LIB_A_OBJECTS_PP)
-	rm -f $(LIB_B_OBJECTS_CC)
-	rm -f $(LIB_B_OBJECTS_PP)
+	-rm -rf ./out/*
+	-rm -f $(APP_OBJECTS_CC)
+	-rm -f $(APP_OBJECTS_PP)
+	-rm -f $(LIB_A_OBJECTS_CC)
+	-rm -f $(LIB_A_OBJECTS_PP)
+	-rm -f $(LIB_B_OBJECTS_CC)
+	-rm -f $(LIB_B_OBJECTS_PP)
