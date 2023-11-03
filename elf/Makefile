@@ -29,16 +29,16 @@ LIB_MAP_EXT  = map
 LIB_LST_EXT  = lst
 
 # liba 
-LIB_A_NAME          = liba
-LIB_A_SRC_DIR=    =./liba
+LIB_A_NAME        = liba
+LIB_A_SRC_DIR     =./liba
 LIB_A_SOURCES_CC  += 
 LIB_A_OBJECTS_CC  += $(patsubst %.c,%.o,$(LIB_A_SOURCES_CC))
 LIB_A_SOURCES_PP  += ${LIB_A_SRC_DIR}/share.cpp
 LIB_A_OBJECTS_PP  += $(patsubst %.cpp,%.o,$(LIB_A_SOURCES_PP))
 
 # libb 
-LIB_B_NAME          = libb
-LIB_B_SRC_DIR=    =./libb
+LIB_B_NAME        = libb
+LIB_B_SRC_DIR     =./libb
 LIB_B_SOURCES_CC  += 
 LIB_B_OBJECTS_CC  += $(patsubst %.c,%.o,$(LIB_B_SOURCES_CC))
 LIB_B_SOURCES_PP  += ${LIB_B_SRC_DIR}/share.cpp
