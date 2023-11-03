@@ -58,7 +58,7 @@ $(APP_OBJECTS_PP):%.o:%.cpp
 
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
 	@echo ${LIB_A_OBJECTS_PP}
-	$(CC) -shared -lstdc++ -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}
+	$(CC) -o $@ $^ ${LDFLAGS} -fPIC -shared -lstdc++ -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}
 
 $(LIB_A_OBJECTS_CC):%.o:%.c
 	arm-none-eabi-gcc -c -fPIC -Wall -fvisibility=default -std=c++11 $< -o $@ # $(CC) ${CCFLAGS} $< -o $@
@@ -66,7 +66,7 @@ $(LIB_A_OBJECTS_PP):%.o:%.cpp
 	arm-none-eabi-g++ -c -fPIC -Wall -fvisibility=default -std=c++11 $< -o $@ # $(CC) ${PPFLAGS} $< -o $@
 
 ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT}:$(LIB_B_OBJECTS_PP) $(LIB_B_OBJECTS_CC)
-	$(CC) -fPIC -shared -lstdc++ -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT}
+	$(CC) -o $@ $^ ${LDFLAGS} -fPIC -shared -lstdc++ -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT} 
 
 $(LIB_B_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS} $< -o $@
