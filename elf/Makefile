@@ -25,7 +25,7 @@ TARGETS = app liba libb lst
 ALL : ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT}
 	
 ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} ${OUT_DIR}/${APP_OUT_NAME}.${APP_MAP_EXT}:$(APP_OBJECTS_PP) $(APP_OBJECTS_CC)
-	$(CC) -o $@ $^ ${LDFLAGS} -Map=${OUT_DIR}/${APP_OUT_NAME}.${APP_MAP_EXT}
+	$(CC) -o $@ $^ ${LDFLAGS} -Map=${OUT_DIR}
 
 $(APP_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS} $< -o $@
