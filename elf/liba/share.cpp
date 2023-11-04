@@ -1,5 +1,5 @@
 int a = 32;
-
+char c = 'f';
 int add(){
     a = 0;
     return a;
