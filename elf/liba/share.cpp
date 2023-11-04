@@ -3,6 +3,8 @@ int b;
 int c;
 int d;
 
+void empty(){}
+
 int add(){
     a = 0;
     return a;
