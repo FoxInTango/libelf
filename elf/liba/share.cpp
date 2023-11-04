@@ -11,7 +11,7 @@ int add(){
 }
 
 int sub(){
-    b = 1;
+    a = b * a;
     return a;
 }
 
