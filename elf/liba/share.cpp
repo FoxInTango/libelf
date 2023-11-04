@@ -1,5 +1,6 @@
 int a = 32;
 char c = 'f';
+void* p = 0;
 int add(){
     a = 0;
     return a;
