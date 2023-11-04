@@ -1,5 +1,5 @@
-int a = 1;
-int b = 1;
+int a = 32;
+int b = 16;
 int c;
 int d;
 
