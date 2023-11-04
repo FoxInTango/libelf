@@ -1,6 +1,6 @@
 int a = 32;
 char c = 'f';
-void* p = 32;
+void* p = (void*)0x10838;
 int add(){
     a = 0;
     return a;
