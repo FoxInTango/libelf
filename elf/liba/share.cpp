@@ -12,7 +12,7 @@ int add(){
 
 int sub(){
     a = b * a;
-    return a;
+    return d;
 }
 
 int div() {
