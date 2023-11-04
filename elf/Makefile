@@ -59,7 +59,7 @@ $(APP_OBJECTS_PP):%.o:%.cpp
 	$(CC) ${PPFLAGS} $< -o $@
 
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
-	arm-none-eabi-g++ -fPIC -shared -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT} # -lstdc++ 
+	arm-none-eabi-g++ -shared -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT} # -lstdc++ 
 
 $(LIB_A_OBJECTS_CC):%.o:%.c
 	arm-none-eabi-gcc -c $< -o $@ -fPIC -O0 -g3 -Wall -fvisibility=default -std=c++11 # $(CC) ${CCFLAGS} $< -o $@
