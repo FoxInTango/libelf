@@ -1,15 +1,17 @@
 CC=arm-none-eabi-gcc
+PP=arm-none-eabi-g++
 AS=arm-none-eabi-as
 AR=arm-none-eabi-ar
 LD=arm-none-eabi-ld
+OD=arm-none-eabi-objdump
 
-OUT_DIR := ./out
-
-#CCFLAGS = -c -fPIC -Wall -fvisibility=hidden
-#PPFLAGS = -c -fPIC -Wall -fvisibility=hidden -std=c++11
+ASFLAGS = 
 CCFLAGS = -c -fPIC -Wall -fvisibility=hidden
 PPFLAGS = -c -fPIC -Wall -fvisibility=hidden -std=c++11
 LDFLAGS = 
+ODFLAGS = 
+
+OUT_DIR := ./out
 
 # app
 APP_OUT_NAME = app

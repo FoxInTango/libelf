@@ -7,11 +7,17 @@ void empty(){}
 
 int add(){
     a = 0;
+    b = 0;
+    c = 0;
+    d = 0;
     return a;
 }
 
 int sub(){
     a = 1;
+    b = 1;
+    c = 1;
+    d = 1;
     return a;
 }
 
