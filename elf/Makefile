@@ -8,7 +8,7 @@ OD=arm-none-eabi-objdump
 ASFLAGS = 
 CCFLAGS = -c -fPIC -Wall -fvisibility=hidden #-fPIC -O0 -g3 -Wall -fvisibility=default -std=c++11
 PPFLAGS = -c -fPIC -Wall -fvisibility=hidden -std=c++11
-LDFLAGS = -fPIC -shared -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT} # -lstdc++ 
+LDFLAGS = -fPIC -shared # -lstdc++ 
 ODFLAGS = 
 
 OUT_DIR := ./out
@@ -59,14 +59,14 @@ $(APP_OBJECTS_PP):%.o:%.cpp
 	$(CC) ${PPFLAGS} $< -o $@
 
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
-	$(PP) ${LDFLAGS}  -o $@ $^
+	$(PP) ${LDFLAGS}  -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT} #$(CC) -o $@ $^ ${LDFLAGS} -fPIC -shared -lstdc++ -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT} 
 $(LIB_A_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS} $< -o $@
 $(LIB_A_OBJECTS_PP):%.o:%.cpp
 	$(PP) ${PPFLAGS} $< -o $@ #$(PP) -c $< -o $@ -fPIC -O0 -g3 -Wall -fvisibility=default -std=c++11 # $(CC) ${PPFLAGS} $< -o $@
 
 ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT}:$(LIB_B_OBJECTS_PP) $(LIB_B_OBJECTS_CC)
-	$(CC) -o $@ $^ ${LDFLAGS} -fPIC -shared -lstdc++ -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT} 
+	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT}
 
 $(LIB_B_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS} $< -o $@
