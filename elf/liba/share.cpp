@@ -1,7 +1,7 @@
 int a = 32;
-int b;
-int c;
-int d;
+int b = 16;
+int c = 64;
+int d = 96;
 
 void empty(){}
 
