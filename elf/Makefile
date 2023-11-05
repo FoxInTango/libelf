@@ -81,6 +81,7 @@ $(LIB_A_OBJECTS_CC):%.o:%.c
 $(LIB_A_OBJECTS_PP):%.o:%.cpp
 	$(PP) ${PPFLAGS} $< -o $@
 
+
 ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT}:$(LIB_B_OBJECTS_PP) $(LIB_B_OBJECTS_CC)
 	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT}
 
