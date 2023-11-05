@@ -8,7 +8,7 @@ int add(){
 }
 
 void assign(){
-    b = a;
+   b=0;
 }
 
 /*
