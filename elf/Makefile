@@ -35,8 +35,28 @@ APP_OUT_EXT  = elf
 APP_MAP_EXT  = map
 APP_LST_EXT  = lst
 APP_SRC_DIR  =./app
-APP_SOURCES_CC  += ${APP_SRC_DIR}/syscalls.c
-APP_SOURCES_CC  += ${APP_SRC_DIR}/sysmem.c
+ifeq ($(OS),Windows_NT)
+CC=arm-none-eabi-gcc
+PP=arm-none-eabi-g++
+AS=arm-none-eabi-as
+AR=arm-none-eabi-ar
+LD=arm-none-eabi-ld
+OD=arm-none-eabi-objdump
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+	    CC=gcc
+        PP=g++
+        AS=as
+        AR=ar
+        LD=ld
+        OD=objdump
+		APP_SOURCES_CC  += ${APP_SRC_DIR}/syscalls.c
+        APP_SOURCES_CC  += ${APP_SRC_DIR}/sysmem.c
+    endif
+    ifeq ($(UNAME_S),Darwin)
+    endif
+endif
 APP_OBJECTS_CC  += $(patsubst %.c,%.o,$(APP_SOURCES_CC))
 APP_SOURCES_PP  += ${APP_SRC_DIR}/main.cpp
 APP_OBJECTS_PP  += $(patsubst %.cpp,%.o,$(APP_SOURCES_PP))
