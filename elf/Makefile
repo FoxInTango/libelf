@@ -67,7 +67,7 @@ ALL : ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} ${OUT_DIR}/${APP_OUT_NAME}.${APP
       ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_B_NAME}.${LIB_LST_EXT}
 	
 ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} ${OUT_DIR}/${APP_OUT_NAME}.${APP_MAP_EXT}:$(APP_OBJECTS_PP) $(APP_OBJECTS_CC)
-	$(CC) -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${APP_OUT_NAME}.${APP_MAP_EXT}
+	$(CC) -o $@ $^ ${LDFLAGS} #-Wl,-Map=${OUT_DIR}/${APP_OUT_NAME}.${APP_MAP_EXT}
 
 $(APP_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS} $< -o $@
@@ -75,7 +75,7 @@ $(APP_OBJECTS_PP):%.o:%.cpp
 	$(CC) ${PPFLAGS} $< -o $@
 
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
-	$(LD) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}
+	$(LD) ${LDFLAGS} -o $@ $^ #-Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}
 $(LIB_A_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS} $< -o $@
 $(LIB_A_OBJECTS_PP):%.o:%.cpp
