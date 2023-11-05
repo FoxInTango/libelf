@@ -1,9 +1,14 @@
 int a = 32;
+int b;
 char c = 'f';
 void* p = (void*)0x10838;
 int add(){
     a = 0;
     return a;
+}
+
+void assign(){
+    b = a;
 }
 
 /*
