@@ -22,9 +22,9 @@ endif
 # arm-none-eabi-g++ -c -fPIC -O0 -g3 -Wall -fvisibility=default -std=c++11
 
 ASFLAGS = 
-CCFLAGS = -c -fPIC -O0 -g3 -Wall -fvisibility=hidden
-PPFLAGS = -c -fPIC -O0 -g3 -Wall -fvisibility=hidden -std=c++11
-LDFLAGS = -fpic -shared -lstdc++ 
+CCFLAGS = -c -fPIC -O0 -Wall -fvisibility=hidden # -g3
+PPFLAGS = -c -fPIC -O0 -Wall -fvisibility=hidden -std=c++11 # -g3
+LDFLAGS = -fPIC -shared -lstdc++
 ODFLAGS = -h -d -s -t -S -C
 
 OUT_DIR := ./out
