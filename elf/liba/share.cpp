@@ -1,9 +1,11 @@
 int  a = 32;
 char c = 'f';
+char d = 'g';
 void* p = (void*)0x10838;
 int add(){
     a = 0;
     c = 'a';
+    d = 'a';
     return a;
 }
 
