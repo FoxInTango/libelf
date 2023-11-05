@@ -97,7 +97,7 @@ $(APP_OBJECTS_PP):%.o:%.cpp
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
 	$(LD) ${LDFLAGS} -o $@ $^ #-Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}
 $(LIB_A_OBJECTS_CC):%.o:%.c
-	$(CC) ${CCFLAGS}  -o $@ $<
+	$(CC) ${CCFLAGS}  -o $@ $< # ÏÈºóË³Ðò
 $(LIB_A_OBJECTS_PP):%.o:%.cpp
 	$(PP) ${PPFLAGS}  -o $@ $<
 
