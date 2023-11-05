@@ -5,9 +5,11 @@ AR=arm-none-eabi-ar
 LD=arm-none-eabi-ld
 OD=arm-none-eabi-objdump
 
+# arm-none-eabi-g++ -c -fPIC -O0 -g3 -Wall -fvisibility=default -std=c++11
+
 ASFLAGS = 
-CCFLAGS = -c -fPIC -Wall -fvisibility=hidden -O0 -g3
-PPFLAGS = -c -fPIC -Wall -fvisibility=hidden -O0 -g3 -std=c++11
+CCFLAGS = -c -fPIC -O0 -g3 -Wall -fvisibility=hidden
+PPFLAGS = -c -fPIC -O0 -g3 -Wall -fvisibility=hidden -std=c++11
 LDFLAGS = -fPIC -shared # -lstdc++ 
 ODFLAGS = -h -d -s -t -S -C
 
