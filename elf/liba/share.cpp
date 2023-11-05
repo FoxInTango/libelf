@@ -28,4 +28,8 @@ int div() {
  arm-none-eabi-g++ -c -fPIC -O0 -g3 -Wall -fvisibility=hidden -std=c++11 -o liba/share.o liba/share.cpp
  arm-none-eabi-g++ -fPIC -shared -lstdc++ -o out/liba.so  liba/share.o -Wl,-Map=./out/liba.map
  arm-none-eabi-objdump -h -S ./out/liba.so  > ./out/liba.lst
+
+  // 计算 got 地址 存入 r3 ：740 + 8 + 0x00010198
+  // got 偏移量 ： 0x00000030 + 8
+  // 加载 GOT 项 ： 740 + 8 + 0x00010198 + 0x00000030 + 8 =
 */
