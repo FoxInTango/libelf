@@ -10,7 +10,7 @@ OD=arm-none-eabi-objdump
 ASFLAGS = 
 CCFLAGS = -c -fPIC -O0 -g3 -Wall -fvisibility=hidden
 PPFLAGS = -c -fPIC -O0 -g3 -Wall -fvisibility=hidden -std=c++11
-LDFLAGS = -fPIC -shared # -lstdc++ 
+LDFLAGS = -fPIC -shared -lstdc++ 
 ODFLAGS = -h -d -s -t -S -C
 
 OUT_DIR := ./out
