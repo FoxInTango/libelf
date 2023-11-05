@@ -1,5 +1,4 @@
-int a = 32;
-int b;
+int  a = 32;
 char c = 'f';
 void* p = (void*)0x10838;
 int add(){
@@ -8,7 +7,6 @@ int add(){
 }
 
 void assign(){
-   b=0;
 }
 
 /*
