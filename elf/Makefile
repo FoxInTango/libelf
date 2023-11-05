@@ -61,11 +61,11 @@ $(APP_OBJECTS_PP):%.o:%.cpp
 	$(CC) ${PPFLAGS} $< -o $@
 
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
-	$(PP) -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT} #$(CC) -o $@ $^ ${LDFLAGS} -fPIC -shared -lstdc++ -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT} 
+	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT} #$(CC) -o $@ $^ ${LDFLAGS} -fPIC -shared -lstdc++ -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT} 
 $(LIB_A_OBJECTS_CC):%.o:%.c
-	$(CC) $< -o $@ ${CCFLAGS}
+	$(CC) ${CCFLAGS} $< -o $@
 $(LIB_A_OBJECTS_PP):%.o:%.cpp
-	$(PP) $< -o $@ ${PPFLAGS} #$(PP) -c $< -o $@ -fPIC -O0 -g3 -Wall -fvisibility=default -std=c++11 # $(CC) ${PPFLAGS} $< -o $@
+	$(PP) ${PPFLAGS} $< -o $@ #$(PP) -c $< -o $@ -fPIC -O0 -g3 -Wall -fvisibility=default -std=c++11 # $(CC) ${PPFLAGS} $< -o $@
 
 ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT}:$(LIB_B_OBJECTS_PP) $(LIB_B_OBJECTS_CC)
 	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT}
