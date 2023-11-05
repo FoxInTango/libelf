@@ -42,6 +42,8 @@ AS=arm-none-eabi-as
 AR=arm-none-eabi-ar
 LD=arm-none-eabi-ld
 OD=arm-none-eabi-objdump
+APP_SOURCES_CC  += ${APP_SRC_DIR}/syscalls.c
+APP_SOURCES_CC  += ${APP_SRC_DIR}/sysmem.c
 else
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Linux)
@@ -51,8 +53,6 @@ else
         AR=ar
         LD=ld
         OD=objdump
-		APP_SOURCES_CC  += ${APP_SRC_DIR}/syscalls.c
-        APP_SOURCES_CC  += ${APP_SRC_DIR}/sysmem.c
     endif
     ifeq ($(UNAME_S),Darwin)
     endif
