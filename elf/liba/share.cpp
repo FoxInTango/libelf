@@ -3,6 +3,7 @@ char c = 'f';
 void* p = (void*)0x10838;
 int add(){
     a = 0;
+    c = 'a';
     return a;
 }
 
