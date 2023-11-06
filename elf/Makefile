@@ -20,7 +20,9 @@ else
     ifeq ($(UNAME_S),Darwin)
     endif
 endif
-
+# 使用strip, eu-strip, objcopy等剥离与导回符号表及调试信息
+# https://blog.csdn.net/nirendao/article/details/104107608
+# https://zhuanlan.zhihu.com/p/609045881
 ASFLAGS = 
 CCFLAGS = -O0 -g -Wall -c -fmessage-length=0 -fPIC #-MMD -MP # -c -fPIC -O0 -Wall -fvisibility=hidden # -g3
 PPFLAGS = -O0 -g -Wall -c -fmessage-length=0 -fPIC #-MMD -MP # -c -fPIC -O0 -Wall -fvisibility=hidden -std=c++11 # -g3
