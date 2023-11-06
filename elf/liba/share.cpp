@@ -37,4 +37,6 @@ int div() {
   // 计算 got 地址 存入 r3 ：740 + 8 + 0x00010198
   // got 偏移量 ： 0x00000030 + 8
   // 加载 GOT 项 ： 740 + 8 + 0x00010198 + 0x00000030 + 8 =
+
+  // https://www.zhihu.com/question/472094994 <<linker and loader>>
 */
