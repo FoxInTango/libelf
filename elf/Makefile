@@ -5,6 +5,7 @@ AS=arm-none-eabi-as
 AR=arm-none-eabi-ar
 LD=arm-none-eabi-ld
 OD=arm-none-eabi-objdump
+RE=arm-none-eabi-readelf
 else
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Linux)
@@ -14,6 +15,7 @@ else
         AR=ar
         LD=ld
         OD=objdump
+		RE=readelf
     endif
     ifeq ($(UNAME_S),Darwin)
     endif
@@ -24,6 +26,7 @@ CCFLAGS = -O0 -g -Wall -c -fmessage-length=0 -fPIC -MMD -MP # -c -fPIC -O0 -Wall
 PPFLAGS = -O0 -g -Wall -c -fmessage-length=0 -fPIC -MMD -MP # -c -fPIC -O0 -Wall -fvisibility=hidden -std=c++11 # -g3
 LDFLAGS = -fPIC -shared -lstdc++
 ODFLAGS = -h -d -s -t -S -C
+REFLAGS = -a
 
 OUT_DIR := ./out
 

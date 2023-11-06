@@ -6,6 +6,9 @@ void* p = (void*)0x10838;
 int add(){
     a = 0;
     b = 32;
+    c = 'a';
+    d = 'd';
+    p = (void*)0x10839;
     return a;
 }
 
