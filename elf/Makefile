@@ -120,11 +120,11 @@ $(LIB_B_OBJECTS_PP):%.o:%.cpp
 	$(PP) ${PPFLAGS} $< -o $@
 
 ${OUT_DIR}/${APP_OUT_NAME}.${APP_LST_EXT}:
-	$(OD) ${ODFLAGS}} -T -R ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} > ${OUT_DIR}/${APP_OUT_NAME}.${APP_LST_EXT} #-h -t -D -S -C 
+	$(OD) ${ODFLAGS} -T -R ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} > ${OUT_DIR}/${APP_OUT_NAME}.${APP_LST_EXT} #-h -t -D -S -C 
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_LST_EXT}:
-	$(OD) ${ODFLAGS}} -T -R ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_A_NAME}.${LIB_LST_EXT}   # -h -d -s -t -S -C 
+	$(OD) ${ODFLAGS} -T -R ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_A_NAME}.${LIB_LST_EXT}   # -h -d -s -t -S -C 
 ${OUT_DIR}/${LIB_B_NAME}.${LIB_LST_EXT}:
-	$(OD) ${ODFLAGS}} -T -R ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_B_NAME}.${LIB_LST_EXT}   # -h -t -D -S -C 
+	$(OD) ${ODFLAGS} -T -R ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_B_NAME}.${LIB_LST_EXT}   # -h -t -D -S -C 
 clean   :
 	-rm -rf ./out/*
 	-rm -f $(APP_OBJECTS_CC)
