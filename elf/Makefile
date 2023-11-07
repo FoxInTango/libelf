@@ -129,6 +129,7 @@ clean   :
 	-rm -rf ./out/*
 	-rm -f $(APP_OBJECTS_CC)
 	-rm -f $(APP_OBJECTS_PP)
+	-rm -f $(APP_OBJECTS_LST)
 	-rm -f $(LIB_A_OBJECTS_CC)
 	-rm -f $(LIB_A_OBJECTS_PP)
 	-rm -f $(LIB_B_OBJECTS_CC)
