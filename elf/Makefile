@@ -107,7 +107,7 @@ $(APP_OBJECTS_LST):%.lst:%.o
 	$(OD) ${ODFLAGS} $< > $@
 
 $(APP_OBJECTS_ELF):%.elf:%.o
-	$(OD) ${REFLAGS} $< > $@
+	$(RE) ${REFLAGS} $< > $@
 
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
 	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${MAP_EXT}
@@ -121,7 +121,7 @@ $(LIB_A_OBJECTS_LST):%.lst:%.o
 	$(OD) ${ODFLAGS} $< > $@
 
 $(LIB_A_OBJECTS_ELF):%.elf:%.o
-	$(OD) ${REFLAGS} $< > $@
+	$(RE) ${REFLAGS} $< > $@
 
 ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_B_NAME}.${MAP_EXT}:$(LIB_B_OBJECTS_PP) $(LIB_B_OBJECTS_CC)
 	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${MAP_EXT}
@@ -135,7 +135,7 @@ $(LIB_B_OBJECTS_LST):%.lst:%.o
 	$(OD) ${ODFLAGS} $< > $@
 
 $(LIB_B_OBJECTS_ELF):%.elf:%.o
-	$(OD) ${REFLAGS} $< > $@
+	$(RE) ${REFLAGS} $< > $@
 
 ${OUT_DIR}/${APP_OUT_NAME}.${LST_EXT}:
 	$(OD) ${ODFLAGS} -T -R ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} > ${OUT_DIR}/${APP_OUT_NAME}.${LST_EXT} #-h -t -D -S -C 
