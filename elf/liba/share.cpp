@@ -15,6 +15,7 @@ int add(){
 }
 
 void assign(){
+    a = 100;
 }
 
 /*
