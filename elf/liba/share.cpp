@@ -45,6 +45,8 @@ public:
         return tShare;
     }
 };
+
+Share share;
 //#endif // CLASS
 
 /*
