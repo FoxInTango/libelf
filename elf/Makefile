@@ -61,6 +61,8 @@ APP_SOURCES_PP  += ${APP_SRC_DIR}/main.cpp
 APP_OBJECTS_PP  += $(patsubst %.cpp,%.o,$(APP_SOURCES_PP))
 APP_OBJECTS_LST += $(patsubst %.o,%.lst,$(APP_OBJECTS_CC))
 APP_OBJECTS_LST += $(patsubst %.o,%.lst,$(APP_OBJECTS_PP))
+APP_OBJECTS_ELF += $(patsubst %.o,%.elf,$(APP_OBJECTS_CC))
+APP_OBJECTS_ELF += $(patsubst %.o,%.elf,$(APP_OBJECTS_PP))
 
 # lib 
 LIB_NAME_EXT = so
@@ -74,6 +76,8 @@ LIB_A_SOURCES_PP  += ${LIB_A_SRC_DIR}/share.cpp
 LIB_A_OBJECTS_PP  += $(patsubst %.cpp,%.o,$(LIB_A_SOURCES_PP))
 LIB_A_OBJECTS_LST += $(patsubst %.o,%.lst,$(LIB_A_OBJECTS_CC))
 LIB_A_OBJECTS_LST += $(patsubst %.o,%.lst,$(LIB_A_OBJECTS_PP))
+LIB_A_OBJECTS_ELF += $(patsubst %.o,%.elf,$(LIB_A_OBJECTS_CC))
+LIB_A_OBJECTS_ELF += $(patsubst %.o,%.elf,$(LIB_A_OBJECTS_PP))
 
 # libb 
 LIB_B_NAME        = libb
@@ -84,10 +88,12 @@ LIB_B_SOURCES_PP  += ${LIB_B_SRC_DIR}/share.cpp
 LIB_B_OBJECTS_PP  += $(patsubst %.cpp,%.o,$(LIB_B_SOURCES_PP))
 LIB_B_OBJECTS_LST += $(patsubst %.o,%.lst,$(LIB_B_OBJECTS_CC))
 LIB_B_OBJECTS_LST += $(patsubst %.o,%.lst,$(LIB_B_OBJECTS_PP))
+LIB_B_OBJECTS_ELF += $(patsubst %.o,%.elf,$(LIB_B_OBJECTS_CC))
+LIB_B_OBJECTS_ELF += $(patsubst %.o,%.elf,$(LIB_B_OBJECTS_PP))
 
-ALL : ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} ${OUT_DIR}/${APP_OUT_NAME}.${LST_EXT}  ${OUT_DIR}/${APP_OUT_NAME}.${ELF_EXT} ${APP_OBJECTS_LST}   \
-      ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT}  ${OUT_DIR}/${LIB_A_NAME}.${LST_EXT}    ${OUT_DIR}/${LIB_A_NAME}.${ELF_EXT}   ${LIB_A_OBJECTS_LST} \
-      ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT}  ${OUT_DIR}/${LIB_B_NAME}.${LST_EXT}    ${OUT_DIR}/${LIB_B_NAME}.${ELF_EXT}   ${LIB_B_OBJECTS_LST}
+ALL : ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} ${OUT_DIR}/${APP_OUT_NAME}.${LST_EXT}  ${OUT_DIR}/${APP_OUT_NAME}.${ELF_EXT} ${APP_OBJECTS_ELF}   ${APP_OBJECTS_LST}   \
+      ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT}  ${OUT_DIR}/${LIB_A_NAME}.${LST_EXT}    ${OUT_DIR}/${LIB_A_NAME}.${ELF_EXT}   ${LIB_A_OBJECTS_ELF} ${LIB_A_OBJECTS_LST} \
+      ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT}  ${OUT_DIR}/${LIB_B_NAME}.${LST_EXT}    ${OUT_DIR}/${LIB_B_NAME}.${ELF_EXT}   ${LIB_B_OBJECTS_ELF} ${LIB_B_OBJECTS_LST}
 	
 ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} ${OUT_DIR}/${APP_OUT_NAME}.${APP_MAP_EXT}:$(APP_OBJECTS_PP) $(APP_OBJECTS_CC)
 	$(PP) -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${APP_OUT_NAME}.${MAP_EXT}
@@ -100,6 +106,9 @@ $(APP_OBJECTS_PP):%.o:%.cpp
 $(APP_OBJECTS_LST):%.lst:%.o
 	$(OD) ${ODFLAGS} $< > $@
 
+$(APP_OBJECTS_ELF):%.elf:%.o
+	$(OD) ${REFLAGS} $< > $@
+
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
 	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${MAP_EXT}
 
@@ -111,6 +120,9 @@ $(LIB_A_OBJECTS_PP):%.o:%.cpp
 $(LIB_A_OBJECTS_LST):%.lst:%.o
 	$(OD) ${ODFLAGS} $< > $@
 
+$(LIB_A_OBJECTS_ELF):%.elf:%.o
+	$(OD) ${REFLAGS} $< > $@
+
 ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_B_NAME}.${MAP_EXT}:$(LIB_B_OBJECTS_PP) $(LIB_B_OBJECTS_CC)
 	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${MAP_EXT}
 
@@ -121,6 +133,9 @@ $(LIB_B_OBJECTS_PP):%.o:%.cpp
 
 $(LIB_B_OBJECTS_LST):%.lst:%.o
 	$(OD) ${ODFLAGS} $< > $@
+
+$(LIB_B_OBJECTS_ELF):%.elf:%.o
+	$(OD) ${REFLAGS} $< > $@
 
 ${OUT_DIR}/${APP_OUT_NAME}.${LST_EXT}:
 	$(OD) ${ODFLAGS} -T -R ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} > ${OUT_DIR}/${APP_OUT_NAME}.${LST_EXT} #-h -t -D -S -C 
@@ -141,9 +156,12 @@ clean   :
 	-rm -f $(APP_OBJECTS_CC)
 	-rm -f $(APP_OBJECTS_PP)
 	-rm -f $(APP_OBJECTS_LST)
+	-rm -f $(APP_OBJECTS_ELF)
 	-rm -f $(LIB_A_OBJECTS_CC)
 	-rm -f $(LIB_A_OBJECTS_PP)
 	-rm -rf $(LIB_A_OBJECTS_LST)
+	-rm -rf $(LIB_A_OBJECTS_ELF)
 	-rm -f $(LIB_B_OBJECTS_CC)
 	-rm -f $(LIB_B_OBJECTS_PP)
 	-rm -rf $(LIB_B_OBJECTS_LST)
+	-rm -rf $(LIB_B_OBJECTS_ELF)
