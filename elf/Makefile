@@ -63,6 +63,8 @@ endif
 APP_OBJECTS_CC  += $(patsubst %.c,%.o,$(APP_SOURCES_CC))
 APP_SOURCES_PP  += ${APP_SRC_DIR}/main.cpp
 APP_OBJECTS_PP  += $(patsubst %.cpp,%.o,$(APP_SOURCES_PP))
+APP_OBJECTS_LST += $(patsubst %.c,%.o,$(APP_OBJECTS_CC))
+APP_OBJECTS_LST += $(patsubst %.c,%.o,$(APP_OBJECTS_PP))
 
 # lib 
 LIB_NAME_EXT = so
@@ -96,6 +98,8 @@ $(APP_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS} $< -o $@
 $(APP_OBJECTS_PP):%.o:%.cpp
 	$(PP) ${PPFLAGS} $< -o $@
+$(APP_OBJECTS_LST):%.lst %.o
+	$(OD) ${ODFLAGS} $< -o $@
 
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
 	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}
