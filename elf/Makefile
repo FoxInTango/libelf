@@ -32,14 +32,14 @@ REFLAGS = -a
 
 OUT_DIR := ./out
 
-MAP_EXT  = map # .map 文件后缀
-LST_EXT  = lst # objdump 输出文件后缀
-ELF_EXT  = elf # readelf 输出文件后缀
+MAP_EXT  = map
+LST_EXT  = lst
+ELF_EXT  = elf
 
 # app
-APP_OUT_NAME = app  # 主程序文件名
-APP_OUT_EXT  = exe  # 主程序文件后缀
-APP_SRC_DIR  =./app # 主程序源码目录
+APP_OUT_NAME = app
+APP_OUT_EXT  = exe
+APP_SRC_DIR  =./app
 
 ifeq ($(OS),Windows_NT)
 APP_SOURCES_CC  += ${APP_SRC_DIR}/syscalls.c
