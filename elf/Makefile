@@ -63,8 +63,8 @@ endif
 APP_OBJECTS_CC  += $(patsubst %.c,%.o,$(APP_SOURCES_CC))
 APP_SOURCES_PP  += ${APP_SRC_DIR}/main.cpp
 APP_OBJECTS_PP  += $(patsubst %.cpp,%.o,$(APP_SOURCES_PP))
-APP_OBJECTS_LST += $(patsubst %.c,%.o,$(APP_OBJECTS_CC))
-APP_OBJECTS_LST += $(patsubst %.c,%.o,$(APP_OBJECTS_PP))
+APP_OBJECTS_LST += $(patsubst %.o,%.lst,$(APP_OBJECTS_CC))
+APP_OBJECTS_LST += $(patsubst %.o,%.lst,$(APP_OBJECTS_PP))
 
 # lib 
 LIB_NAME_EXT = so
