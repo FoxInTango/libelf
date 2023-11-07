@@ -30,7 +30,7 @@ LDFLAGS = -fPIC -shared # -lstdc++
 ODFLAGS = -d -x -r -s -t -l -w -z -C -S #-h
 REFLAGS = -a
 
-OUT_DIR := ./out # 输出文件目录
+OUT_DIR := ./out
 
 MAP_EXT  = map # .map 文件后缀
 LST_EXT  = lst # objdump 输出文件后缀
