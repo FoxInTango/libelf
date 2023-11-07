@@ -27,7 +27,7 @@ ASFLAGS =
 CCFLAGS = -O0 -g -Wall -c -fmessage-length=0 -fPIC #-MMD -MP # -c -fPIC -O0 -Wall -fvisibility=hidden # -g3
 PPFLAGS = -O0 -g -Wall -c -fmessage-length=0 -fPIC #-MMD -MP # -c -fPIC -O0 -Wall -fvisibility=hidden -std=c++11 # -g3
 LDFLAGS = -fPIC -shared # -lstdc++
-ODFLAGS = -d -h -r -s -t -l -w -z -C -S
+ODFLAGS = -d -x -r -s -t -l -w -z -C -S #-h
 REFLAGS = -a
 
 OUT_DIR := ./out
