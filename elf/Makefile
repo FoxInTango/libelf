@@ -151,6 +151,11 @@ ${OUT_DIR}/${LIB_A_NAME}.${ELF_EXT}:
 ${OUT_DIR}/${LIB_B_NAME}.${ELF_EXT}:
 	$(OD) ${ODFLAGS} ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_B_NAME}.${ELF_EXT}
 
+publish:
+	scp -r ./app alpine:~/elf/
+	scp -r ./liba alpine:~/elf/
+	scp -r ./libb alpine:~/elf/
+	scp -r ./out alpine:~/elf/
 clean   :
 	-rm -rf ./out/*
 	-rm -f $(APP_OBJECTS_CC)
