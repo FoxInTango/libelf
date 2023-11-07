@@ -1,3 +1,4 @@
+#include "share.h"
 int  a = 32;
 int  b = 64;
 char c = 'f';
@@ -34,17 +35,14 @@ int div() {
 //#define CLASS
 
 //#ifdef CLASS
-class Share{
-private:
-    int tShare;
-public:
-    Share(){}
-    ~Share(){}
-public:
-    int share(){
-        return tShare;
-    }
-};
+
+Share::Share(){}
+Share::~Share(){}
+
+int Share::share()
+{
+    return tShare;
+}
 
 Share share;
 //#endif // CLASS
