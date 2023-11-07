@@ -32,19 +32,15 @@ REFLAGS = -a
 
 OUT_DIR := ./out
 
+MAP_EXT  = map
+LST_EXT  = lst
+ELF_EXT  = elf
+
 # app
 APP_OUT_NAME = app
-APP_OUT_EXT  = elf
-APP_MAP_EXT  = map
-APP_LST_EXT  = lst
+APP_OUT_EXT  = exe
 APP_SRC_DIR  =./app
 ifeq ($(OS),Windows_NT)
-CC=arm-none-eabi-gcc
-PP=arm-none-eabi-g++
-AS=arm-none-eabi-as
-AR=arm-none-eabi-ar
-LD=arm-none-eabi-ld
-OD=arm-none-eabi-objdump
 APP_SOURCES_CC  += ${APP_SRC_DIR}/syscalls.c
 APP_SOURCES_CC  += ${APP_SRC_DIR}/sysmem.c
 else
@@ -68,8 +64,6 @@ APP_OBJECTS_LST += $(patsubst %.o,%.lst,$(APP_OBJECTS_PP))
 
 # lib 
 LIB_NAME_EXT = so
-LIB_MAP_EXT  = map
-LIB_LST_EXT  = lst
 
 # liba 
 LIB_A_NAME        = liba
@@ -91,12 +85,12 @@ LIB_B_OBJECTS_PP  += $(patsubst %.cpp,%.o,$(LIB_B_SOURCES_PP))
 LIB_B_OBJECTS_LST += $(patsubst %.o,%.lst,$(LIB_B_OBJECTS_CC))
 LIB_B_OBJECTS_LST += $(patsubst %.o,%.lst,$(LIB_B_OBJECTS_PP))
 
-ALL : ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} ${OUT_DIR}/${APP_OUT_NAME}.${APP_LST_EXT}  ${APP_OBJECTS_LST}   \
-      ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT}  ${OUT_DIR}/${LIB_A_NAME}.${LIB_LST_EXT}    ${LIB_A_OBJECTS_LST} \
-      ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT}  ${OUT_DIR}/${LIB_B_NAME}.${LIB_LST_EXT}    ${LIB_B_OBJECTS_LST}
+ALL : ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} ${OUT_DIR}/${APP_OUT_NAME}.${LST_EXT}  ${OUT_DIR}/${APP_OUT_NAME}.${ELF_EXT} ${APP_OBJECTS_LST}   \
+      ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT}  ${OUT_DIR}/${LIB_A_NAME}.${LST_EXT}    ${OUT_DIR}/${LIB_A_NAME}.${ELF_EXT}   ${LIB_A_OBJECTS_LST} \
+      ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT}  ${OUT_DIR}/${LIB_B_NAME}.${LST_EXT}    ${OUT_DIR}/${LIB_B_NAME}.${ELF_EXT}   ${LIB_B_OBJECTS_LST}
 	
 ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} ${OUT_DIR}/${APP_OUT_NAME}.${APP_MAP_EXT}:$(APP_OBJECTS_PP) $(APP_OBJECTS_CC)
-	$(PP) -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${APP_OUT_NAME}.${APP_MAP_EXT}
+	$(PP) -o $@ $^ ${LDFLAGS} -Wl,-Map=${OUT_DIR}/${APP_OUT_NAME}.${MAP_EXT}
 
 $(APP_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS} $< -o $@
@@ -106,8 +100,8 @@ $(APP_OBJECTS_PP):%.o:%.cpp
 $(APP_OBJECTS_LST):%.lst:%.o
 	$(OD) ${ODFLAGS} $< > $@
 
-${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
-	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}
+${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
+	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${MAP_EXT}
 
 $(LIB_A_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS}  -o $@ $<
@@ -117,8 +111,8 @@ $(LIB_A_OBJECTS_PP):%.o:%.cpp
 $(LIB_A_OBJECTS_LST):%.lst:%.o
 	$(OD) ${ODFLAGS} $< > $@
 
-${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT}:$(LIB_B_OBJECTS_PP) $(LIB_B_OBJECTS_CC)
-	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${LIB_MAP_EXT}
+${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_B_NAME}.${MAP_EXT}:$(LIB_B_OBJECTS_PP) $(LIB_B_OBJECTS_CC)
+	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${MAP_EXT}
 
 $(LIB_B_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS} $< -o $@
@@ -128,12 +122,20 @@ $(LIB_B_OBJECTS_PP):%.o:%.cpp
 $(LIB_B_OBJECTS_LST):%.lst:%.o
 	$(OD) ${ODFLAGS} $< > $@
 
-${OUT_DIR}/${APP_OUT_NAME}.${APP_LST_EXT}:
-	$(OD) ${ODFLAGS} -T -R ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} > ${OUT_DIR}/${APP_OUT_NAME}.${APP_LST_EXT} #-h -t -D -S -C 
-${OUT_DIR}/${LIB_A_NAME}.${LIB_LST_EXT}:
-	$(OD) ${ODFLAGS} -T -R ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_A_NAME}.${LIB_LST_EXT}   # -h -d -s -t -S -C 
-${OUT_DIR}/${LIB_B_NAME}.${LIB_LST_EXT}:
-	$(OD) ${ODFLAGS} -T -R ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_B_NAME}.${LIB_LST_EXT}   # -h -t -D -S -C 
+${OUT_DIR}/${APP_OUT_NAME}.${LST_EXT}:
+	$(OD) ${ODFLAGS} -T -R ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} > ${OUT_DIR}/${APP_OUT_NAME}.${LST_EXT} #-h -t -D -S -C 
+${OUT_DIR}/${LIB_A_NAME}.${LST_EXT}:
+	$(OD) ${ODFLAGS} -T -R ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_A_NAME}.${LST_EXT}   # -h -d -s -t -S -C 
+${OUT_DIR}/${LIB_B_NAME}.${LST_EXT}:
+	$(OD) ${ODFLAGS} -T -R ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_B_NAME}.${LST_EXT}   # -h -t -D -S -C 
+
+${OUT_DIR}/${APP_OUT_NAME}.${ELF_EXT}:
+	$(RE) ${REFLAGS} ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} > ${OUT_DIR}/${APP_OUT_NAME}.${ELF_EXT}
+${OUT_DIR}/${LIB_A_NAME}.${ELF_EXT}:
+	$(OD) ${ODFLAGS} ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_A_NAME}.${ELF_EXT}
+${OUT_DIR}/${LIB_B_NAME}.${ELF_EXT}:
+	$(OD) ${ODFLAGS} ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_B_NAME}.${ELF_EXT}
+
 clean   :
 	-rm -rf ./out/*
 	-rm -f $(APP_OBJECTS_CC)
