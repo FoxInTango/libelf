@@ -31,7 +31,7 @@ int div() {
 }
 */
 
-//#define CLASS
+#define CLASS
 
 #ifdef CLASS
 class Share{
