@@ -29,6 +29,23 @@ int div() {
     return 0;
 }
 */
+
+//#define CLASS
+
+#ifdef CLASS
+class Share{
+private:
+    int tShare;
+public:
+    Share(){}
+    ~Share(){}
+public:
+    int share(){
+        return tShare;
+    }
+};
+#endif // CLASS
+
 /*
  arm-none-eabi-g++ -c -fPIC -O0 -g3 -Wall -fvisibility=hidden -std=c++11 -o liba/share.o liba/share.cpp
  arm-none-eabi-g++ -fPIC -shared -lstdc++ -o out/liba.so  liba/share.o -Wl,-Map=./out/liba.map
