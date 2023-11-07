@@ -98,7 +98,8 @@ $(APP_OBJECTS_CC):%.o:%.c
 	$(CC) ${CCFLAGS} $< -o $@
 $(APP_OBJECTS_PP):%.o:%.cpp
 	$(PP) ${PPFLAGS} $< -o $@
-$(APP_OBJECTS_LST):%.lst %.o
+
+$(APP_OBJECTS_LST):%.lst:%.o
 	$(OD) ${ODFLAGS} $< -o $@
 
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${LIB_MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
