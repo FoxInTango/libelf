@@ -207,3 +207,7 @@ clean   :
 
 # R_ARM_V4BX https://github.com/ARM-software/abi-aa/blob/main/aaelf32/aaelf32.rst
 # _GLOBAL__sub_I https://blog.csdn.net/qq_38600065/article/details/117370846
+
+# LR寄存器 https://www.cnblogs.com/qiyuexin/p/12609300.html
+#          在ARM体系结构中LR的特殊用途有两种：一是用来保存子程序返回地址；
+#          二是当异常发生时，LR中保存的值等于异常发生时PC的值减4（或者减2），因此在各种异常模式下可以根据LR的值返回到异常发生前的相应位置继续执行。
