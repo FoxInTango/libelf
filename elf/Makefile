@@ -204,3 +204,6 @@ clean   :
 #      https://learn.microsoft.com/zh-cn/cpp/build/reference/compiler-options-listed-by-category?view=msvc-170
 
 # ’ªªÿÀ› ”Î ARM ehabi https://www.leadroyal.cn/p/1125/
+
+# R_ARM_V4BX https://github.com/ARM-software/abi-aa/blob/main/aaelf32/aaelf32.rst
+# _GLOBAL__sub_I https://blog.csdn.net/qq_38600065/article/details/117370846
