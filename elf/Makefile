@@ -172,3 +172,13 @@ clean   :
 	-rm -f $(LIB_B_OBJECTS_PP)
 	-rm -rf $(LIB_B_OBJECTS_LST)
 	-rm -rf $(LIB_B_OBJECTS_ELF)
+
+# gcc 函数别名
+# gcc 函数命名 
+#    https://www.cnblogs.com/wfwenchao/articles/4140388.html 
+#    <<程序员的自我修养>>
+
+# MSVC https://learn.microsoft.com/zh-cn/cpp/build/reference/fa-fa-listing-file?view=msvc-170
+#      https://learn.microsoft.com/zh-cn/cpp/build/reference/compiler-options-listed-by-category?view=msvc-170
+
+# 栈回溯 与 ARM ehabi https://www.leadroyal.cn/p/1125/

@@ -41,7 +41,7 @@ Share::~Share(){}
 
 int Share::share()
 {
-    return tShare;
+    return add() + tShare;
 }
 
 Share share;
@@ -57,4 +57,9 @@ Share share;
   // 加载 GOT 项 ： 740 + 8 + 0x00010198 + 0x00000030 + 8 =
 
   // https://www.zhihu.com/question/472094994 <<linker and loader>>
+
+   生成汇编
+   arm-none-eabi-g++ -S -O0 -g -Wall -c -fmessage-length=0 -fPIC liba/share.cpp -o liba/share.S
+   生成目标
+   arm-none-eabi-as liba/share.S -o liba/share.s.o
 */
