@@ -32,6 +32,24 @@ ELFFile::ELFFile(const char* path){
 
 ELFFile::~ELFFile(){}
 
+size_t str_split(const char* buffer,const size_t& length,char** strs,const size_t& str_arr_size){
+    size_t index  = 0;
+    size_t offset = 0;
+    size_t str_count = 0;
+    while(index < length && str_count < str_arr_size){
+        if(buffer[index] == 0){
+            size_t size = index - offset;
+            char* str = new char[size + 1];
+            memcln(buffer + offset,size,str);
+            strs[str_count] = str;
+            str_count ++;
+            offset = index + 1;
+        }
+        index ++;
+    }
+
+    return str_count;
+}
 int ELFFile::open(const char* path){
     FILE* file = fopen(path,"r");
     char elf_magic[4];
@@ -50,6 +68,42 @@ int ELFFile::open(const char* path){
         printf("elf_bitwide: %d\n", (int)elf_bitwide);
         printf("elf_edian:   %d\n", (int)elf_edian);
         printf("elf_version: %d\n", (int)elf_version);
+
+        size_t symtab_off = 0x000a0c;
+        size_t strtab_off = 0x000d0c;
+        size_t shstrtab_off = 0010d4;
+
+        size_t symtab_size = 0x000300;
+        size_t strtab_size = 0x000100;
+        size_t shstrtab_size = 0x0000d0;
+
+        char* symtab = new char[symtab_size + 1];
+        char* strtab = new char[strtab_size + 1];
+        char* shstrtab* = new char[shstrtab_size];
+
+        fseek(file,symtab_off, SEEK_SET);
+        fread(symtab,1,symtab_size,file);
+
+        fseek(file, symtab_off, SEEK_SET);
+        fread(strtab, 1, shstrtab_size, file);
+
+        fseek(file, symtab_off, SEEK_SET);
+        fread(shstrtab, 1, shstrtab_size, file);
+
+        char** strs = new char*[128];
+        size_t str_count = str_split(strtab,strtab_size,strs,128);
+
+        char** shstrs = new char* [128];
+        sh_str_count = str_split(shstrtab, shstrtab_size, shstrs, 128);
+
+        for(int i = 0;i < str_count;i ++){
+            printf("str %d : %s\n",str_count,strs[i]);
+        }
+
+        for (int i = 0; i < shstr_count; i++) {
+            printf("str %d : %s\n", sh_str_count, shstrs[i]);
+        }
+
         fclose(file);
         return 1;
     }

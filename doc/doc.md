@@ -10,6 +10,9 @@
 
 # R_ARM_V4BX https://github.com/ARM-software/abi-aa/blob/main/aaelf32/aaelf32.rst
 # _GLOBAL__sub_I https://blog.csdn.net/qq_38600065/article/details/117370846
+# __dso_handle https://www.cnblogs.com/lsgxeva/p/11040993.html Where is __dso_handle defined?
+#                  __dso_handle is a "guard" that is used to identify dynamic shared objects during global destruction.
+#                  relative with -fno-use-cxa-atexit
 
 # ##################################ARM##################################
 # ARM ª„±‡÷∏¡Ó https://zhuanlan.zhihu.com/p/164415889
