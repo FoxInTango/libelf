@@ -1,4 +1,3 @@
-TARGET_TYPE = 
 ifeq ($(OS),Windows_NT)
 CC=arm-none-eabi-gcc
 PP=arm-none-eabi-g++
@@ -7,8 +6,6 @@ AR=arm-none-eabi-ar
 LD=arm-none-eabi-ld
 OD=arm-none-eabi-objdump
 RE=arm-none-eabi-readelf
-OUT_DIR := ./out/arm32
-TARGET_TYPE = arm32
 else
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Linux)
@@ -19,13 +16,12 @@ else
         LD=ld
         OD=objdump
 		RE=readelf
-		OUT_DIR := ./out/linux
-		TARGET_TYPE = linux
     endif
     ifeq ($(UNAME_S),Darwin)
     endif
 endif
 
+OUT_DIR := ./out
 # 使用strip, eu-strip, objcopy等剥离与导回符号表及调试信息
 # https://blog.csdn.net/nirendao/article/details/104107608
 # https://zhuanlan.zhihu.com/p/609045881
@@ -109,10 +105,10 @@ $(APP_OBJECTS_PP):%.o:%.cpp
 	$(PP) ${PPFLAGS} $< -o $@
 
 $(APP_OBJECTS_LST):%.lst:%.o
-	$(OD) ${ODFLAGS} $< > $@.${TARGET_TYPE}
+	$(OD) ${ODFLAGS} $< > $@
 
 $(APP_OBJECTS_ELF):%.elf:%.o
-	$(RE) ${REFLAGS} $< > $@.${TARGET_TYPE}
+	$(RE) ${REFLAGS} $< > $@
 
 ${OUT_DIR}/${LIB_A_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_A_NAME}.${MAP_EXT}:$(LIB_A_OBJECTS_PP) $(LIB_A_OBJECTS_CC)
 	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_A_NAME}.${MAP_EXT}
@@ -123,10 +119,10 @@ $(LIB_A_OBJECTS_PP):%.o:%.cpp
 	$(PP) ${PPFLAGS}  -o $@ $<
 
 $(LIB_A_OBJECTS_LST):%.lst:%.o
-	$(OD) ${ODFLAGS} $< > $@.${TARGET_TYPE}
+	$(OD) ${ODFLAGS} $< > $@
 
 $(LIB_A_OBJECTS_ELF):%.elf:%.o
-	$(RE) ${REFLAGS} $< > $@.${TARGET_TYPE}
+	$(RE) ${REFLAGS} $< > $@
 
 ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT} ${OUT_DIR}/${LIB_B_NAME}.${MAP_EXT}:$(LIB_B_OBJECTS_PP) $(LIB_B_OBJECTS_CC)
 	$(PP) ${LDFLAGS} -o $@ $^ -Wl,-Map=${OUT_DIR}/${LIB_B_NAME}.${MAP_EXT}
@@ -137,10 +133,10 @@ $(LIB_B_OBJECTS_PP):%.o:%.cpp
 	$(PP) ${PPFLAGS} $< -o $@
 
 $(LIB_B_OBJECTS_LST):%.lst:%.o
-	$(OD) ${ODFLAGS} $< > $@.${TARGET_TYPE}
+	$(OD) ${ODFLAGS} $< > $@
 
 $(LIB_B_OBJECTS_ELF):%.elf:%.o
-	$(RE) ${REFLAGS} $< > $@.${TARGET_TYPE}
+	$(RE) ${REFLAGS} $< > $@
 
 ${OUT_DIR}/${APP_OUT_NAME}.${LST_EXT}:
 	$(OD) ${ODFLAGS} -T -R ${OUT_DIR}/${APP_OUT_NAME}.${APP_OUT_EXT} > ${OUT_DIR}/${APP_OUT_NAME}.${LST_EXT} #-h -t -D -S -C 
