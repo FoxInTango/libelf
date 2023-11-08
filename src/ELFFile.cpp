@@ -94,14 +94,14 @@ int ELFFile::open(const char* path){
         size_t str_count = str_split(strtab,strtab_size,strs,128);
 
         char** shstrs = new char* [128];
-        sh_str_count = str_split(shstrtab, shstrtab_size, shstrs, 128);
+        shstr_count = str_split(shstrtab, shstrtab_size, shstrs, 128);
 
         for(int i = 0;i < str_count;i ++){
             printf("str %d : %s\n",str_count,strs[i]);
         }
 
         for (int i = 0; i < shstr_count; i++) {
-            printf("str %d : %s\n", sh_str_count, shstrs[i]);
+            printf("str %d : %s\n", shstr_count, shstrs[i]);
         }
 
         fclose(file);
