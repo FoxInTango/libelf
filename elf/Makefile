@@ -178,7 +178,8 @@ PUBLISH_TARGET_LOCAL:
 	cp -r ./libb ~/elf/linux/libb
 	cp -r ./out  ~/elf/linux/out
 
-
+pull:
+	scp -r alpine:~/elf/linux ./
 clean   :
 	-rm -rf ./out/*
 	-rm -f $(APP_OBJECTS_CC)
