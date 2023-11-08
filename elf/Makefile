@@ -152,12 +152,31 @@ ${OUT_DIR}/${LIB_A_NAME}.${ELF_EXT}:
 ${OUT_DIR}/${LIB_B_NAME}.${ELF_EXT}:
 	$(OD) ${ODFLAGS} ${OUT_DIR}/${LIB_B_NAME}.${LIB_NAME_EXT}  > ${OUT_DIR}/${LIB_B_NAME}.${ELF_EXT}
 
-publish:
-	scp -r ./app  alpine:~/elf/app
-	scp -r ./liba alpine:~/elf/liba
-	scp -r ./libb alpine:~/elf/libb
-	scp -r ./out  alpine:~/elf/out
 
+ifeq ($(OS),Windows_NT)
+    PUBLISH_TARGET = PUBLISH_TARGET_ALPINE
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+	    PUBLISH_TARGET = PUBLISH_TARGET_LOCAL
+    endif
+    ifeq ($(UNAME_S),Darwin)
+    endif
+endif
+
+publish:${PUBLISH_TARGET}
+
+PUBLISH_TARGET_ALPINE:
+	scp -r ./app  alpine:~/elf/arm32/app
+	scp -r ./liba alpine:~/elf/arm32/liba
+	scp -r ./libb alpine:~/elf/arm32/libb
+	scp -r ./out  alpine:~/elf/arm32/out
+
+PUBLISH_TARGET_LOCAL:
+	cp -r ./app  ~/elf/linux/app
+	cp -r ./liba ~/elf/linux/liba
+	cp -r ./libb ~/elf/linux/libb
+	cp -r ./out  ~/elf/linux/out
 
 clean   :
 	-rm -rf ./out/*
