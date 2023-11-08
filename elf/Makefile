@@ -178,6 +178,7 @@ PUBLISH_TARGET_LOCAL:
 	cp -r ./libb ~/elf/linux/libb
 	cp -r ./out  ~/elf/linux/out
 
+
 clean   :
 	-rm -rf ./out/*
 	-rm -f $(APP_OBJECTS_CC)
