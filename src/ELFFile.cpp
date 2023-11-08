@@ -40,7 +40,7 @@ size_t str_split(char* buffer,const size_t& length,char** strs,const size_t& str
         if(buffer[index] == 0){
             size_t size = index - offset;
             char* str = new char[size + 1];
-            memcln(buffer + offset,size,str);
+            string_copy(str,buffer + offset,size);
             strs[str_count] = str;
             str_count ++;
             offset = index + 1;
@@ -97,11 +97,11 @@ int ELFFile::open(const char* path){
         size_t shstr_count = str_split(shstrtab, shstrtab_size, shstrs, 128);
 
         for(int i = 0;i < str_count;i ++){
-            printf("str %d : %s\n",str_count,strs[i]);
+            printf("str %d : %s\n",i,strs[i]);
         }
 
         for (int i = 0; i < shstr_count; i++) {
-            printf("str %d : %s\n", shstr_count, shstrs[i]);
+            printf("shstr %d : %s\n", i, shstrs[i]);
         }
 
         fclose(file);
