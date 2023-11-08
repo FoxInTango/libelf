@@ -166,7 +166,6 @@ endif
 
 publish:${PUBLISH_TARGET}
 
-
 PUBLISH_TARGET_ALPINE:
 	scp -r ./app  alpine:~/elf/arm32/app
 	scp -r ./liba alpine:~/elf/arm32/liba
