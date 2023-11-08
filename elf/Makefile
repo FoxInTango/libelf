@@ -22,9 +22,7 @@ else
 endif
 
 OUT_DIR := ./out
-# 使用strip, eu-strip, objcopy等剥离与导回符号表及调试信息
-# https://blog.csdn.net/nirendao/article/details/104107608
-# https://zhuanlan.zhihu.com/p/609045881
+
 ASFLAGS = 
 CCFLAGS = -O0 -g -Wall -c -fmessage-length=0 -fPIC #-MMD -MP # -c -fPIC -O0 -Wall -fvisibility=hidden # -g3
 PPFLAGS = -O0 -g -Wall -c -fmessage-length=0 -fPIC #-MMD -MP # -c -fPIC -O0 -Wall -fvisibility=hidden -std=c++11 # -g3
@@ -194,20 +192,3 @@ clean   :
 	-rm -f $(LIB_B_OBJECTS_PP)
 	-rm -rf $(LIB_B_OBJECTS_LST)
 	-rm -rf $(LIB_B_OBJECTS_ELF)
-
-# gcc 函数别名
-# gcc 函数命名 
-#    https://www.cnblogs.com/wfwenchao/articles/4140388.html 
-#    <<程序员的自我修养>>
-
-# MSVC https://learn.microsoft.com/zh-cn/cpp/build/reference/fa-fa-listing-file?view=msvc-170
-#      https://learn.microsoft.com/zh-cn/cpp/build/reference/compiler-options-listed-by-category?view=msvc-170
-
-# 栈回溯 与 ARM ehabi https://www.leadroyal.cn/p/1125/
-
-# R_ARM_V4BX https://github.com/ARM-software/abi-aa/blob/main/aaelf32/aaelf32.rst
-# _GLOBAL__sub_I https://blog.csdn.net/qq_38600065/article/details/117370846
-
-# LR寄存器 https://www.cnblogs.com/qiyuexin/p/12609300.html
-#          在ARM体系结构中LR的特殊用途有两种：一是用来保存子程序返回地址；
-#          二是当异常发生时，LR中保存的值等于异常发生时PC的值减4（或者减2），因此在各种异常模式下可以根据LR的值返回到异常发生前的相应位置继续执行。
