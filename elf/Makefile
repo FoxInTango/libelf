@@ -161,6 +161,7 @@ publish:
 	scp -r ./libb alpine:~/elf/libb
 	scp -r ./out  alpine:~/elf/out
 
+
 clean   :
 	-rm -rf ./out/*
 	-rm -f $(APP_OBJECTS_CC)
