@@ -41,6 +41,7 @@ Share::~Share(){}
 
 int Share::share()
 {
+    assign();
     return add() + tShare;
 }
 
