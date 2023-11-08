@@ -6,6 +6,7 @@ AR=arm-none-eabi-ar
 LD=arm-none-eabi-ld
 OD=arm-none-eabi-objdump
 RE=arm-none-eabi-readelf
+OUT_DIR := ./out/arm32
 else
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Linux)
@@ -16,6 +17,7 @@ else
         LD=ld
         OD=objdump
 		RE=readelf
+		OUT_DIR := ./out/linux
     endif
     ifeq ($(UNAME_S),Darwin)
     endif
@@ -29,8 +31,6 @@ PPFLAGS = -O0 -g -Wall -c -fmessage-length=0 -fPIC #-MMD -MP # -c -fPIC -O0 -Wal
 LDFLAGS = -fPIC -shared # -lstdc++
 ODFLAGS = -d -x -r -s -t -l -w -z -C -S #-h
 REFLAGS = -a
-
-OUT_DIR := ./out
 
 MAP_EXT  = map
 LST_EXT  = lst
