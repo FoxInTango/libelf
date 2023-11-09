@@ -100,10 +100,10 @@ int ELFFile::open(const char* path){
     uint16_t e_shnum;       //  2字节，section header table中header的数目。如果文件没有section header table, e_shnum的值为0。e_shentsize乘以e_shnum，就得到了整个section header table的大小。
     uint16_t e_shstrndx;    //  2字节。section header string table index.包含了section header table中section name string table。如果没有section name string table, e_shstrndx的值是SHN_UNDEF
     if(file){
-        fread(&e_magic,  1, 4, file);//
-        fread(&e_bitwide,1, 1, file);//5
-        fread(&e_edian,  1, 1, file);//6
-        fread(&e_version,1, 1, file);
+        fread(&e_i_magic,  1, 4, file);//
+        fread(&e_i_bitwide,1, 1, file);//5
+        fread(&e_i_edian,  1, 1, file);//6
+        fread(&e_i_version,1, 1, file);
 
         fread(&e_type,    1, 2, file);
         fread(&e_machine, 1, 2, file);
