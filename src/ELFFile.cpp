@@ -116,7 +116,7 @@ int ELFFile::open(const char* path){
             fread(&e_entry, 1, 4, file);
             fread(&e_phoff, 1, 4, file);
             fread(&e_shoff, 1, 4, file);
-            if (endian != e_ident[5]) {
+            if (endian != (char)e_ident[5]) {
             e_entry = endianSwap32u(e_entry);
             e_phoff = endianSwap32u(e_phoff);
             e_shoff = endianSwap32u(e_shoff);
@@ -128,7 +128,7 @@ int ELFFile::open(const char* path){
             fread(&e_entry_64, 1, 8, file);
             fread(&e_phoff_64, 1, 8, file);
             fread(&e_shoff_64, 1, 8, file);
-            if (endian != e_ident[5]) {
+            if (endian != (char)e_ident[5]) {
             e_entry_64 = endianSwap64u(e_entry_64);
             e_phoff_64 = endianSwap64u(e_phoff_64);
             e_shoff_64 = endianSwap64u(e_shoff_64);
@@ -147,7 +147,7 @@ int ELFFile::open(const char* path){
 
         // ´¦Àí×Ö½ÚÐò
         
-        if(endian != e_ident[5]){
+        if(endian != (char)e_ident[5]){
             e_type      = endianSwap16u(e_type);
             e_machine   = endianSwap16u(e_machine);
             e_version   = endianSwap32u(e_version);
