@@ -52,7 +52,7 @@ size_t str_split(char* buffer,const size_t& length,char** strs,const size_t& str
     return str_count;
 }
 int ELFFile::open(const char* path){
-    Endian endian = (Endian)CurrentEndian();
+    Endian endian;//= (Endian)CurrentEndian();
 
     FILE* file = fopen(path,"r");
     // ²Î¿¼ https://www.cnblogs.com/jiqingwu/p/elf_explore_2.html
