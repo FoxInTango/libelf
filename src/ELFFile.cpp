@@ -83,6 +83,7 @@ int ELFFile::open(const char* path){
     char e_i_bitwide;
     char e_i_endian;
     char e_i_version;
+    unsigned char	e_ident[EI_NIDENT];
     uint16_t e_type;        //  2字节，描述了ELF文件的类型。
     uint16_t e_machine;     //  2字节,描述了文件面向的架构，可取值如下（因为文档较老，现在有更多取值，参见/usr/include/elf.h中的EM_开头的宏定义）：
     uint32_t e_version;     //  2字节,描述了ELF文件的版本号，合法取值如下：
@@ -105,6 +106,7 @@ int ELFFile::open(const char* path){
         fread(&e_i_endian,  1, 1, file);//6
         fread(&e_i_version,1, 1, file);
 
+        fread(&e_ident, 1, 16, file);//
         fread(&e_type,    1, 2, file);
         fread(&e_machine, 1, 2, file);
         fread(&e_version, 1, 4, file);
@@ -146,10 +148,10 @@ int ELFFile::open(const char* path){
             e_shnum     = endianSwap16u(e_shnum);
             e_phentsize = endianSwap16u(e_phentsize);
         }*/
-        printf("elf_magic:     %c%c%c%c\n", e_i_magic[0], e_i_magic[1], e_i_magic[2], e_i_magic[3]);
-        printf("elf_bitwide:   %d\n", (int)e_i_bitwide);
-        printf("elf_edian:     %d\n", (int)e_i_endian);
-        printf("elf_version:   %d\n", (int)e_i_version);
+        printf("elf_magic:     %c%c%c%c\n", e_ident[0], e_ident[1], e_ident[2], e_ident[3]);
+        printf("elf_bitwide:   %c\n", (int)e_ident[4]);
+        printf("elf_edian:     %c\n", (int)e_ident[5]);
+        printf("elf_version:   %c\n", (int)e_ident[6]);
         printf("elf_type:      %d\n", e_type);
         printf("elf_version:   %d\n", e_version);
         printf("elf_flags:     %d\n", e_flags);
