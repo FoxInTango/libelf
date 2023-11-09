@@ -79,10 +79,6 @@ int ELFFile::open(const char* path){
      EM_860, 7, Intel 80860
      EM_MIPS, 8, MIPS RS3000
      */
-    char e_i_magic[4];
-    char e_i_bitwide;
-    char e_i_endian;
-    char e_i_version;
     unsigned char	e_ident[EI_NIDENT];
     uint16_t e_type;        //  2字节，描述了ELF文件的类型。
     uint16_t e_machine;     //  2字节,描述了文件面向的架构，可取值如下（因为文档较老，现在有更多取值，参见/usr/include/elf.h中的EM_开头的宏定义）：
@@ -101,11 +97,12 @@ int ELFFile::open(const char* path){
     uint16_t e_shnum;       //  2字节，section header table中header的数目。如果文件没有section header table, e_shnum的值为0。e_shentsize乘以e_shnum，就得到了整个section header table的大小。
     uint16_t e_shstrndx;    //  2字节。section header string table index.包含了section header table中section name string table。如果没有section name string table, e_shstrndx的值是SHN_UNDEF
     if(file){
+        /*
         fread(&e_i_magic,  1, 4, file);//
         fread(&e_i_bitwide,1, 1, file);//5
         fread(&e_i_endian,  1, 1, file);//6
         fread(&e_i_version,1, 1, file);
-
+        */
         fread(&e_ident, 1, 16, file);//
         fread(&e_type,    1, 2, file);
         fread(&e_machine, 1, 2, file);
