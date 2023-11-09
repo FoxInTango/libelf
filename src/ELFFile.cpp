@@ -133,7 +133,7 @@ int ELFFile::open(const char* path){
         fread(&e_phentsize, 1, 2, file);
 
         // ´¦Àí×Ö½ÚÐò
-
+        /*
         if(endian != e_i_endian){
             e_type      = endianSwap16u(e_type);
             e_machine   = endianSwap16u(e_machine);
@@ -145,7 +145,7 @@ int ELFFile::open(const char* path){
             e_shentsize = endianSwap16u(e_shentsize);
             e_shnum     = endianSwap16u(e_shnum);
             e_phentsize = endianSwap16u(e_phentsize);
-        }
+        }*/
         printf("elf_magic:     %c%c%c%c\n", e_i_magic[0], e_i_magic[1], e_i_magic[2], e_i_magic[3]);
         printf("elf_bitwide:   %d\n", (int)e_i_bitwide);
         printf("elf_edian:     %d\n", (int)e_i_endian);
