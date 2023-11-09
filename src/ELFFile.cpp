@@ -85,10 +85,10 @@ int ELFFile::open(const char* path){
         fseek(file,symtab_off, SEEK_SET);
         fread(symtab,1,symtab_size,file);
 
-        fseek(file, symtab_off, SEEK_SET);
+        fseek(file, strtab_off, SEEK_SET);
         fread(strtab, 1, shstrtab_size, file);
 
-        fseek(file, symtab_off, SEEK_SET);
+        fseek(file, shstrtab_off, SEEK_SET);
         fread(shstrtab, 1, shstrtab_size, file);
 
         char** strs = new char*[128];
