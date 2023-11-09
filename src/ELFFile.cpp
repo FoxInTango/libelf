@@ -146,9 +146,9 @@ int ELFFile::open(const char* path){
             e_phentsize = endianSwap16u(e_phentsize);
         }*/
         printf("elf_magic:     %c%c%c%c\n", e_ident[0], e_ident[1], e_ident[2], e_ident[3]);
-        printf("elf_bitwide:   %c\n", (int)e_ident[4]);
-        printf("elf_edian:     %c\n", (int)e_ident[5]);
-        printf("elf_version:   %c\n", (int)e_ident[6]);
+        printf("elf_bitwide:   %c\n", e_ident[4]);
+        printf("elf_edian:     %c\n", e_ident[5]);
+        printf("elf_version:   %c\n", e_ident[6]);
         printf("elf_type:      %d\n", e_type);
         printf("elf_version:   %d\n", e_version);
         printf("elf_flags:     %d\n", e_flags);
