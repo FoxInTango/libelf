@@ -103,6 +103,7 @@ int ELFFile::open(const char* path){
         fread(&e_i_endian,  1, 1, file);//6
         fread(&e_i_version,1, 1, file);
         */
+        printf("ELF File %s loaded.\n",path);
         fread(&e_ident, 1, EI_NIDENT, file);//
         fread(&e_type,    1, 2, file);
         fread(&e_machine, 1, 2, file);
@@ -213,6 +214,8 @@ int ELFFile::open(const char* path){
         fclose(file);
         return 1;
     }
+
+    printf("ELF File %s Missed.\n", path);
     return 0;
 }
 
