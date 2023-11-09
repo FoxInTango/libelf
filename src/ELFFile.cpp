@@ -107,7 +107,7 @@ int ELFFile::open(const char* path){
         fread(&e_type,    1, 2, file);
         fread(&e_machine, 1, 2, file);
         fread(&e_version, 1, 4, file);
-        if(e_i_bitwide == 1){
+        if((unsigned char)e_ident[4] == 1){
             fread(&e_entry, 1, 4, file);
             fread(&e_phoff, 1, 4, file);
             fread(&e_shoff, 1, 4, file);
@@ -133,7 +133,7 @@ int ELFFile::open(const char* path){
 
         // ´¦Àí×Ö½ÚÐò
         /*
-        if(endian != e_i_endian){
+        if(endian != e_ident[5]){
             e_type      = endianSwap16u(e_type);
             e_machine   = endianSwap16u(e_machine);
             e_version   = endianSwap32u(e_version);
