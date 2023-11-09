@@ -108,7 +108,8 @@ int ELFFile::open(const char* path){
         char* e_entry_string = 0;
         char* e_phoff_string = 0;
         char* e_shoff_string = 0;
-        fread(&e_ident, 1, EI_NIDENT, file);//
+        fread(&e_ident, 1, EI_NIDENT, file);
+        printf("Platform Endian : %c ELFEndian: %c\n", endian, e_ident[5]);
         fread(&e_type,    1, 2, file);
         fread(&e_machine, 1, 2, file);
         fread(&e_version, 1, 4, file);
