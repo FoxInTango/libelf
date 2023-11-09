@@ -102,7 +102,7 @@ int ELFFile::open(const char* path){
     if(file){
         fread(&e_i_magic,  1, 4, file);//
         fread(&e_i_bitwide,1, 1, file);//5
-        fread(&e_i_edian,  1, 1, file);//6
+        fread(&e_i_endian,  1, 1, file);//6
         fread(&e_i_version,1, 1, file);
 
         fread(&e_type,    1, 2, file);
@@ -112,10 +112,17 @@ int ELFFile::open(const char* path){
             fread(&e_entry, 1, 4, file);
             fread(&e_phoff, 1, 4, file);
             fread(&e_shoff, 1, 4, file);
+
+            e_entry = endianSwap32u(e_entry);
+            e_phoff = endianSwap32u(e_phoff);
+            e_shoff = endianSwap32u(e_shoff);
         }else { 
             fread(&e_entry_64, 1, 8, file);
             fread(&e_phoff_64, 1, 8, file);
             fread(&e_shoff_64, 1, 8, file);
+            e_entry_64 = endianSwap64u(e_entry_64);
+            e_phoff_64 = endianSwap64u(e_phoff_64);
+            e_shoff_64 = endianSwap64u(e_shoff_64);
         }
         fread(&e_flags,  1, 4, file);
         fread(&e_ehsize, 1, 2, file);
@@ -128,18 +135,31 @@ int ELFFile::open(const char* path){
         // ´¦Àí×Ö½ÚÐò
 
         if(endian != e_i_endian){
-            e_type    = endianSwap16u(e_type);
-            e_machine = endianSwap16u(e_machine);
-            e_version = endianSwap32u(e_version);
+            e_type      = endianSwap16u(e_type);
+            e_machine   = endianSwap16u(e_machine);
+            e_version   = endianSwap32u(e_version);
+            e_flags     = endianSwap32u(e_flags);
+            e_ehsize    = endianSwap16u(e_ehsize);
+            e_phentsize = endianSwap16u(e_phentsize);
+            e_phnum     = endianSwap16u(e_phnum);
+            e_shentsize = endianSwap16u(e_shentsize);
+            e_shnum     = endianSwap16u(e_shnum);
+            e_phentsize = endianSwap16u(e_phentsize);
         }
         printf("elf_magic:   %c%c%c%c\n", e_i_magic[0], e_i_magic[1], e_i_magic[2], e_i_magic[3]);
 
         printf("elf_bitwide: %d\n", (int)e_i_bitwide);
-        printf("elf_edian:   %d\n", (int)e_i_edian);
-        printf("elf_version: %d\n", (int)e_i_version);
-
-        
-
+        printf("elf_edian:      %d\n", (int)e_i_edian);
+        printf("elf_version:   %d\n", (int)e_i_version);
+        printf("elf_type:      %d\n", e_type);
+        printf("elf_version:   %d\n", e_version);
+        printf("elf_flags:     %d\n", e_flags);
+        printf("elf_ehsize:    %d\n", e_ehsize);
+        printf("elf_phentsize: %d\n", e_phentsize);
+        printf("elf_phnum:     %d\n", e_phnum);
+        printf("elf_shentsize: %d\n", e_shentsize);
+        printf("elf_shnum:     %d\n", e_shnum);
+        printf("elf_phentsize: %d\n", e_phentsize);
         size_t symtab_off = 0x000a0c;
         size_t strtab_off = 0x000d0c;
         size_t shstrtab_off = 0x0010d4;
