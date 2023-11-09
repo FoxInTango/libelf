@@ -52,7 +52,7 @@ size_t str_split(char* buffer,const size_t& length,char** strs,const size_t& str
     return str_count;
 }
 int ELFFile::open(const char* path){
-    Endian endian = Endian(CurrentEndian());
+    unsigned char endian = (unsigned char)(Endian(CurrentEndian()));
 
     FILE* file = fopen(path,"r");
     // 参考 https://www.cnblogs.com/jiqingwu/p/elf_explore_2.html
@@ -116,7 +116,7 @@ int ELFFile::open(const char* path){
             fread(&e_entry, 1, 4, file);
             fread(&e_phoff, 1, 4, file);
             fread(&e_shoff, 1, 4, file);
-            if (endian != (char)e_ident[5]) {
+            if (endian != e_ident[5]) {
             e_entry = endianSwap32u(e_entry);
             e_phoff = endianSwap32u(e_phoff);
             e_shoff = endianSwap32u(e_shoff);
@@ -128,7 +128,7 @@ int ELFFile::open(const char* path){
             fread(&e_entry_64, 1, 8, file);
             fread(&e_phoff_64, 1, 8, file);
             fread(&e_shoff_64, 1, 8, file);
-            if (endian != (char)e_ident[5]) {
+            if (endian != e_ident[5]) {
             e_entry_64 = endianSwap64u(e_entry_64);
             e_phoff_64 = endianSwap64u(e_phoff_64);
             e_shoff_64 = endianSwap64u(e_shoff_64);
@@ -147,7 +147,7 @@ int ELFFile::open(const char* path){
 
         // 处理字节序
         
-        if(endian != (char)e_ident[5]){
+        if(endian != e_ident[5]){
             e_type      = endianSwap16u(e_type);
             e_machine   = endianSwap16u(e_machine);
             e_version   = endianSwap32u(e_version);
