@@ -4,8 +4,8 @@ using namespace foxintango;
 #include <stdio.h>
 
 /**
- * Linux Ó¦ÓÃ²ã
- * Linux ÄÚºË²ã
+ * Linux åº”ç”¨å±‚
+ * Linux å†…æ ¸å±‚
  * MCU 
  */
 
@@ -16,7 +16,7 @@ using namespace foxintango;
 #define APOLLO_IN_KERNEL
 
 /**
- * ÁË½âSTM32 stdioµÄÊ¹ÓÃ·½Ê½ 
+ * äº†è§£STM32 stdioçš„ä½¿ç”¨æ–¹å¼ 
  */
 #endif
 
@@ -55,16 +55,17 @@ int ELFFile::open(const char* path){
     unsigned char endian = (unsigned char)(CurrentEndian());
 
     FILE* file = fopen(path,"r");
-    // ²Î¿¼ https://www.cnblogs.com/jiqingwu/p/elf_explore_2.html
+    // å‚è€ƒ https://www.cnblogs.com/jiqingwu/p/elf_explore_2.html
+    //      https://github.com/ARM-software/abi-aa/blob/main/aaelf32/aaelf32.rst
 
     /* e_type
      
      ET_NONE, 0, No file type
-     ET_REL, 1, Relocatable file£¨¿ÉÖØ¶¨Î»ÎÄ¼ş£¬Í¨³£ÊÇÎÄ¼şÃûÒÔ.o½áÎ²£¬Ä¿±êÎÄ¼ş£©
-     ET_EXEC, 2, Executable file £¨¿ÉÖ´ĞĞÎÄ¼ş£©
-     ET_DYN, 3, Shared object file £¨¶¯Ì¬¿âÎÄ¼ş£¬ÄãÓÃgcc±àÒë³öµÄ¶ş½øÖÆÍùÍùÒ²ÊôÓÚÕâÖÖÀàĞÍ£¬¾ªÑÈÂğ£¿£©
-     ET_CORE, 4, Core file £¨coreÎÄ¼ş£¬ÊÇcore dumpÉú³ÉµÄ°É£¿£©
-     ET_NUM, 5£¬±íÊ¾ÒÑ¾­¶¨ÒåÁË5ÖÖÎÄ¼şÀàĞÍ
+     ET_REL, 1, Relocatable fileï¼ˆå¯é‡å®šä½æ–‡ä»¶ï¼Œé€šå¸¸æ˜¯æ–‡ä»¶åä»¥.oç»“å°¾ï¼Œç›®æ ‡æ–‡ä»¶ï¼‰
+     ET_EXEC, 2, Executable file ï¼ˆå¯æ‰§è¡Œæ–‡ä»¶ï¼‰
+     ET_DYN, 3, Shared object file ï¼ˆåŠ¨æ€åº“æ–‡ä»¶ï¼Œä½ ç”¨gccç¼–è¯‘å‡ºçš„äºŒè¿›åˆ¶å¾€å¾€ä¹Ÿå±äºè¿™ç§ç±»å‹ï¼ŒæƒŠè®¶å—ï¼Ÿï¼‰
+     ET_CORE, 4, Core file ï¼ˆcoreæ–‡ä»¶ï¼Œæ˜¯core dumpç”Ÿæˆçš„å§ï¼Ÿï¼‰
+     ET_NUM, 5ï¼Œè¡¨ç¤ºå·²ç»å®šä¹‰äº†5ç§æ–‡ä»¶ç±»å‹
      ET_LOPROC, 0xff00, Processor-specific
      ET_HIPROC, 0xffff, Processor-specific
      */
@@ -80,22 +81,22 @@ int ELFFile::open(const char* path){
      EM_MIPS, 8, MIPS RS3000
      */
     unsigned char	e_ident[EI_NIDENT];
-    uint16_t e_type;        //  2×Ö½Ú£¬ÃèÊöÁËELFÎÄ¼şµÄÀàĞÍ¡£
-    uint16_t e_machine;     //  2×Ö½Ú,ÃèÊöÁËÎÄ¼şÃæÏòµÄ¼Ü¹¹£¬¿ÉÈ¡ÖµÈçÏÂ£¨ÒòÎªÎÄµµ½ÏÀÏ£¬ÏÖÔÚÓĞ¸ü¶àÈ¡Öµ£¬²Î¼û/usr/include/elf.hÖĞµÄEM_¿ªÍ·µÄºê¶¨Òå£©£º
-    uint32_t e_version;     //  2×Ö½Ú,ÃèÊöÁËELFÎÄ¼şµÄ°æ±¾ºÅ£¬ºÏ·¨È¡ÖµÈçÏÂ£º
-    uint32_t e_entry;       // £¨32Î»4×Ö½Ú£¬64Î»8×Ö½Ú£©£¬Ö´ĞĞÈë¿Úµã£¬Èç¹ûÎÄ¼şÃ»ÓĞÈë¿Úµã£¬Õâ¸öÓò±£³Ö0¡£
+    uint16_t e_type;        //  2å­—èŠ‚ï¼Œæè¿°äº†ELFæ–‡ä»¶çš„ç±»å‹ã€‚
+    uint16_t e_machine;     //  2å­—èŠ‚,æè¿°äº†æ–‡ä»¶é¢å‘çš„æ¶æ„ï¼Œå¯å–å€¼å¦‚ä¸‹ï¼ˆå› ä¸ºæ–‡æ¡£è¾ƒè€ï¼Œç°åœ¨æœ‰æ›´å¤šå–å€¼ï¼Œå‚è§/usr/include/elf.hä¸­çš„EM_å¼€å¤´çš„å®å®šä¹‰ï¼‰ï¼š
+    uint32_t e_version;     //  2å­—èŠ‚,æè¿°äº†ELFæ–‡ä»¶çš„ç‰ˆæœ¬å·ï¼Œåˆæ³•å–å€¼å¦‚ä¸‹ï¼š
+    uint32_t e_entry;       // ï¼ˆ32ä½4å­—èŠ‚ï¼Œ64ä½8å­—èŠ‚ï¼‰ï¼Œæ‰§è¡Œå…¥å£ç‚¹ï¼Œå¦‚æœæ–‡ä»¶æ²¡æœ‰å…¥å£ç‚¹ï¼Œè¿™ä¸ªåŸŸä¿æŒ0ã€‚
     uint64_t e_entry_64;
-    uint32_t e_phoff;       //  (32Î»4×Ö½Ú£¬64Î»8×Ö½Ú£©£¬program header tableµÄoffset£¬Èç¹ûÎÄ¼şÃ»ÓĞPH£¬Õâ¸öÖµÊÇ0¡£
+    uint32_t e_phoff;       //  (32ä½4å­—èŠ‚ï¼Œ64ä½8å­—èŠ‚ï¼‰ï¼Œprogram header tableçš„offsetï¼Œå¦‚æœæ–‡ä»¶æ²¡æœ‰PHï¼Œè¿™ä¸ªå€¼æ˜¯0ã€‚
     uint64_t e_phoff_64;
-    uint32_t e_shoff;       //  (32Î»4×Ö½Ú£¬64Î»8×Ö½Ú£©£¬ section header table µÄoffset£¬Èç¹ûÎÄ¼şÃ»ÓĞSH£¬Õâ¸öÖµÊÇ0¡£
+    uint32_t e_shoff;       //  (32ä½4å­—èŠ‚ï¼Œ64ä½8å­—èŠ‚ï¼‰ï¼Œ section header table çš„offsetï¼Œå¦‚æœæ–‡ä»¶æ²¡æœ‰SHï¼Œè¿™ä¸ªå€¼æ˜¯0ã€‚
     uint64_t e_shoff_64;
-    uint32_t e_flags;       //  4×Ö½Ú£¬ÌØ¶¨ÓÚ´¦ÀíÆ÷µÄ±êÖ¾£¬32Î»ºÍ64Î»Intel¼Ü¹¹¶¼Ã»ÓĞ¶¨Òå±êÖ¾£¬Òò´ËeflagsµÄÖµÊÇ0¡£
-    uint16_t e_ehsize;      //  2×Ö½Ú£¬ELF headerµÄ´óĞ¡£¬32Î»ELFÊÇ52×Ö½Ú£¬64Î»ÊÇ64×Ö½Ú¡£
-    uint16_t e_phentsize;   //  2×Ö½Ú¡£program header tableÖĞÃ¿¸öÈë¿ÚµÄ´óĞ¡¡£
-    uint16_t e_phnum;       //  2×Ö½Ú¡£Èç¹ûÎÄ¼şÃ»ÓĞprogram header table, e_phnumµÄÖµÎª0¡£e_phentsize³ËÒÔe_phnum¾ÍµÃµ½ÁËÕû¸öprogram header tableµÄ´óĞ¡¡£
-    uint16_t e_shentsize;   //  2×Ö½Ú£¬section header tableÖĞentryµÄ´óĞ¡£¬¼´Ã¿¸ösection headerÕ¼¶àÉÙ×Ö½Ú¡£
-    uint16_t e_shnum;       //  2×Ö½Ú£¬section header tableÖĞheaderµÄÊıÄ¿¡£Èç¹ûÎÄ¼şÃ»ÓĞsection header table, e_shnumµÄÖµÎª0¡£e_shentsize³ËÒÔe_shnum£¬¾ÍµÃµ½ÁËÕû¸ösection header tableµÄ´óĞ¡¡£
-    uint16_t e_shstrndx;    //  2×Ö½Ú¡£section header string table index.°üº¬ÁËsection header tableÖĞsection name string table¡£Èç¹ûÃ»ÓĞsection name string table, e_shstrndxµÄÖµÊÇSHN_UNDEF
+    uint32_t e_flags;       //  4å­—èŠ‚ï¼Œç‰¹å®šäºå¤„ç†å™¨çš„æ ‡å¿—ï¼Œ32ä½å’Œ64ä½Intelæ¶æ„éƒ½æ²¡æœ‰å®šä¹‰æ ‡å¿—ï¼Œå› æ­¤eflagsçš„å€¼æ˜¯0ã€‚
+    uint16_t e_ehsize;      //  2å­—èŠ‚ï¼ŒELF headerçš„å¤§å°ï¼Œ32ä½ELFæ˜¯52å­—èŠ‚ï¼Œ64ä½æ˜¯64å­—èŠ‚ã€‚
+    uint16_t e_phentsize;   //  2å­—èŠ‚ã€‚program header tableä¸­æ¯ä¸ªå…¥å£çš„å¤§å°ã€‚
+    uint16_t e_phnum;       //  2å­—èŠ‚ã€‚å¦‚æœæ–‡ä»¶æ²¡æœ‰program header table, e_phnumçš„å€¼ä¸º0ã€‚e_phentsizeä¹˜ä»¥e_phnumå°±å¾—åˆ°äº†æ•´ä¸ªprogram header tableçš„å¤§å°ã€‚
+    uint16_t e_shentsize;   //  2å­—èŠ‚ï¼Œsection header tableä¸­entryçš„å¤§å°ï¼Œå³æ¯ä¸ªsection headerå å¤šå°‘å­—èŠ‚ã€‚
+    uint16_t e_shnum;       //  2å­—èŠ‚ï¼Œsection header tableä¸­headerçš„æ•°ç›®ã€‚å¦‚æœæ–‡ä»¶æ²¡æœ‰section header table, e_shnumçš„å€¼ä¸º0ã€‚e_shentsizeä¹˜ä»¥e_shnumï¼Œå°±å¾—åˆ°äº†æ•´ä¸ªsection header tableçš„å¤§å°ã€‚
+    uint16_t e_shstrndx;    //  2å­—èŠ‚ã€‚section header string table index.åŒ…å«äº†section header tableä¸­section name string tableã€‚å¦‚æœæ²¡æœ‰section name string table, e_shstrndxçš„å€¼æ˜¯SHN_UNDEF
     if(file){
         /*
         fread(&e_i_magic,  1, 4, file);//
@@ -148,7 +149,7 @@ int ELFFile::open(const char* path){
         fread(&e_shnum,  1, 2, file);
         fread(&e_phentsize, 1, 2, file);
 
-        // ´¦Àí×Ö½ÚĞò
+        // å¤„ç†å­—èŠ‚åº
         /*
         if(endian != e_ident[5]){
             e_type      = endianSwap16u(e_type);
