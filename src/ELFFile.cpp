@@ -117,11 +117,12 @@ int ELFFile::open(const char* path){
             fread(&e_entry, 1, 4, file);
             fread(&e_phoff, 1, 4, file);
             fread(&e_shoff, 1, 4, file);
+            /*
             if (endian != e_ident[5]) {
             e_entry = endianSwap32u(e_entry);
             e_phoff = endianSwap32u(e_phoff);
             e_shoff = endianSwap32u(e_shoff);
-            }
+            }*/
             printf("e_entry: %u \n", e_entry);
             printf("e_phoff: %u \n", e_shoff);
             printf("e_shoff: %u \n", e_phoff);
@@ -129,11 +130,12 @@ int ELFFile::open(const char* path){
             fread(&e_entry_64, 1, 8, file);
             fread(&e_phoff_64, 1, 8, file);
             fread(&e_shoff_64, 1, 8, file);
+            /*
             if (endian != e_ident[5]) {
             e_entry_64 = endianSwap64u(e_entry_64);
             e_phoff_64 = endianSwap64u(e_phoff_64);
             e_shoff_64 = endianSwap64u(e_shoff_64);
-            }
+            }*/
             printf("e_entry_64: %ul \n", e_entry_64);
             printf("e_phoff_64: %ul \n", e_shoff_64);
             printf("e_shoff_64: %ul \n", e_phoff_64);
@@ -147,7 +149,7 @@ int ELFFile::open(const char* path){
         fread(&e_phentsize, 1, 2, file);
 
         // ´¦Àí×Ö½ÚÐò
-        
+        /*
         if(endian != e_ident[5]){
             e_type      = endianSwap16u(e_type);
             e_machine   = endianSwap16u(e_machine);
@@ -159,7 +161,7 @@ int ELFFile::open(const char* path){
             e_shentsize = endianSwap16u(e_shentsize);
             e_shnum     = endianSwap16u(e_shnum);
             e_phentsize = endianSwap16u(e_phentsize);
-        }
+        }*/
         printf("elf_magic:     %c%c%c%c\n", e_ident[0], e_ident[1], e_ident[2], e_ident[3]);
         printf("elf_bitwide:   %d\n", (int)e_ident[4]);
         printf("elf_edian:     %d\n", (int)e_ident[5]);
