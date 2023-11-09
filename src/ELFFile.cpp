@@ -123,8 +123,8 @@ int ELFFile::open(const char* path){
         }
         */
 
-        printf("strtab : %s\n", strtab);
-        printf("shstrtab : %s\n", shstrtab);
+        printf("strtab : %s\n", &strtab[1]);
+        printf("shstrtab : %s\n",&shstrtab[1]);
 
         fclose(file);
         return 1;
