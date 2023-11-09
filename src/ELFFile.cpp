@@ -102,7 +102,15 @@ int ELFFile::open(const char* path){
         }
 
         for (int i = 0; i < shstr_count; i++) {
-            printf("shstr %d : %sstr_size: %u\n", i, shstrs[i], string_length<char>(shstrs[i]));
+            printf("shstr %d : %s str_size: %u\n", i, shstrs[i], string_length<char>(shstrs[i]));
+        }
+
+        for(int i = 0;i < strtab_size;i ++){
+            if(strtab[i] == 0){
+                printf("\n");
+            }else{
+                printf("%c",strtab[i]);
+            }
         }
 
         fclose(file);
