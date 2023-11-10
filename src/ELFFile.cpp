@@ -199,7 +199,7 @@ int ELFFile::open(const char* path){
         size_t shstrtab_off = 0x0010d4;
 
         size_t symtab_size = 0x000300;
-        size_t strtab_size = 0x000200;
+        size_t strtab_size = 000100;
         size_t shstrtab_size = 0x0000d0;
 
         char* symtab = new char[symtab_size + 1];
