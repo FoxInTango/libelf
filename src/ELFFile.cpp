@@ -39,9 +39,12 @@ size_t str_split(char* buffer,const size_t& length,char** strs,const size_t& str
     while(index < length && str_count < str_arr_size){
         if(buffer[index] == '\0'){
             size_t size = index - offset;
-            char* str = new char[size + 1];
-            memclr(str,size + 1,0);
-            string_copy(str,buffer + offset,size);
+            char* str = 0;
+            if(size > 0){
+                str = new char[size + 1];
+                memclr(str, size + 1, 0);
+                string_copy(str, buffer + offset, size);
+            }
             strs[str_count] = str;
             str_count ++;
             offset = index + 1;
