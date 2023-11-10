@@ -126,8 +126,8 @@ int ELFFile::open(const char* path){
             e_shoff = endianSwap32u(e_shoff);
             }*/
             printf("e_entry: %u \n", e_entry);
-            printf("e_phoff: %u \n", e_shoff);
-            printf("e_shoff: %u \n", e_phoff);
+            printf("e_phoff: %u \n", e_phoff);
+            printf("e_shoff: %u \n", e_shoff);
         }else { 
             fread(&e_entry_64, 1, 8, file);
             fread(&e_phoff_64, 1, 8, file);
@@ -139,8 +139,8 @@ int ELFFile::open(const char* path){
             e_shoff_64 = endianSwap64u(e_shoff_64);
             }*/
             printf("e_entry_64: %ul \n", e_entry_64);
-            printf("e_phoff_64: %ul \n", e_shoff_64);
-            printf("e_shoff_64: %ul \n", e_phoff_64);
+            printf("e_phoff_64: %ul \n", e_phoff_64);
+            printf("e_shoff_64: %ul \n", e_shoff_64);
         }
         fread(&e_flags, 1, 4, file);
         fread(&e_ehsize, 1, 2, file);
