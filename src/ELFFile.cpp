@@ -31,31 +31,24 @@ ELFFile::ELFFile(const char* path){
 }
 
 ELFFile::~ELFFile(){}
+#include <stdlib.h>
+#include <stdio.h>
+size_t str_split(char* buffer,const size_t& length,char** strs,const size_t& strs_size){
+    size_t index = 0;
+    size_t count = 0;
 
-size_t str_split(char* buffer,const size_t& length,char** strs,const size_t& str_arr_size){
-    size_t index  = 0;
-    size_t offset = 0;
-    size_t str_count = 0;
-    while(index < length && str_count < str_arr_size){
-        if(buffer[index] == '\0'){
-            size_t size = index - offset;
-            
-            if(size > 0){
-                char* str = new char[size + 1];
-                memclr(str, size + 1, 0);
-                string_copy<char>(str, buffer + offset, size);
-                strs[str_count] = str;
-            } else {
-                strs[str_count] = 0;
-            }
+    while(index < length){
+        unsigned char last = 0;
 
-            str_count ++;
-            offset = index + 1;
+        if(last == 0){
+            strs[count] = buffer[index];
         }
+
+        last = buffer[index];
         index ++;
     }
 
-    return str_count;
+return count;
 }
 
 int ELFFile::open(const char* path){
