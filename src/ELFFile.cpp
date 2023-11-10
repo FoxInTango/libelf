@@ -37,11 +37,12 @@ size_t str_split(char* buffer,const size_t& length,char** strs,const size_t& str
     size_t index = 0;
     size_t count = 0;
 
-    while(index < length){
+    while(index < length && count < strs_size){
         unsigned char last = 0;
 
         if(last == 0){
             strs[count] = &buffer[index];
+            count ++;
         }
 
         last = buffer[index];
