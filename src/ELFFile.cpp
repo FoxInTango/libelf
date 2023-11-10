@@ -233,7 +233,7 @@ int ELFFile::open(const char* path){
         
         for(int i = 0;i < strtab_size;i ++){
             if(strtab[i] == 0){
-                printf("--");
+                printf(" | ");
             }else{
                 printf("%c",strtab[i]);
             }
@@ -241,7 +241,7 @@ int ELFFile::open(const char* path){
 
         for (int i = 0; i < shstrtab_size; i++) {
             if (shstrtab[i] == 0) {
-                printf("--");
+                printf(" | ");
             }
             else {
                 printf("%c", shstrtab[i]);
