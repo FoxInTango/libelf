@@ -139,9 +139,9 @@ int ELFFile::open(const char* path){
             e_phoff_64 = endianSwap64u(e_phoff_64);
             e_shoff_64 = endianSwap64u(e_shoff_64);
             }*/
-            printf("e_entry_64: %ul \n", e_entry_64);
-            printf("e_phoff_64: %ul \n", e_phoff_64);
-            printf("e_shoff_64: %ul \n", e_shoff_64);
+            printf("e_entry_64: %llu \n", e_entry_64);
+            printf("e_phoff_64: %llu \n", e_phoff_64);
+            printf("e_shoff_64: %llu \n", e_shoff_64);
         }
         fread(&e_flags, 1, 4, file);
         fread(&e_ehsize, 1, 2, file);
