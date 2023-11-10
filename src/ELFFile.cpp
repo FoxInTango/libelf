@@ -230,7 +230,7 @@ int ELFFile::open(const char* path){
         }
         /**/
 
-        
+        /*
         for(int i = 0;i < strtab_size;i ++){
             if(strtab[i] == 0){
                 printf(" | ");
@@ -247,12 +247,10 @@ int ELFFile::open(const char* path){
                 printf("%c", shstrtab[i]);
             }
         }
-        /**/
+        */
         fclose(file);
         return 1;
     }
-
-    printf("ELF File %s Missed.\n", path);
     return 0;
 }
 
