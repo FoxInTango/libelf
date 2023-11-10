@@ -195,7 +195,7 @@ int ELFFile::open(const char* path){
         printf("elf_shnum:     %d\n", e_shnum);
         printf("elf_shstrndx:  %d\n", e_shstrndx);
         size_t symtab_off = 0x000a0c;
-        size_t strtab_off = 0x00000d10 ;//0x000d0c;
+        size_t strtab_off = 0x000d0c;
         size_t shstrtab_off = 0x0010d4;
 
         size_t symtab_size = 0x000300;
