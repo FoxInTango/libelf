@@ -98,6 +98,7 @@ int ELFFile::open(const char* path){
     uint16_t e_shentsize;   //  2字节，section header table中entry的大小，即每个section header占多少字节。
     uint16_t e_shnum;       //  2字节，section header table中header的数目。如果文件没有section header table, e_shnum的值为0。e_shentsize乘以e_shnum，就得到了整个section header table的大小。
     uint16_t e_shstrndx;    //  2字节。section header string table index.包含了section header table中section name string table。如果没有section name string table, e_shstrndx的值是SHN_UNDEF
+                            // e_shstrndx : 最后一个e_shstrndx表示的是section table中的第e_shstrndx项元素，保存了所有section table名称的字符串信息。https://zhuanlan.zhihu.com/p/254882216
     if(file){
         /*
         fread(&e_i_magic,  1, 4, file);//
@@ -203,7 +204,7 @@ int ELFFile::open(const char* path){
 
         char** shstrs = new char* [128];
         size_t shstr_count = str_split(shstrtab, shstrtab_size, shstrs, 128);
-        
+        /*
         for(int i = 0;i < str_count;i ++){
             printf("str %d : size: %u -- %s \n",i, string_length<char>(strs[i]),strs[i]);
         }
@@ -211,7 +212,7 @@ int ELFFile::open(const char* path){
         for (int i = 0; i < shstr_count; i++) {
             printf("shstr %d : size: %u -- %s \n\n", i, string_length<char>(shstrs[i]), shstrs[i]);
         }
-        //*/
+        */
 
         /*
         for(int i = 0;i < strtab_size;i ++){
