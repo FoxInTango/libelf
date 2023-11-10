@@ -37,7 +37,7 @@ size_t str_split(char* buffer,const size_t& length,char** strs,const size_t& str
     size_t offset = 0;
     size_t str_count = 0;
     while(index < length && str_count < str_arr_size){
-        if(buffer[index] == 0){
+        if(buffer[index] == '\0'){
             size_t size = index - offset;
             char* str = new char[size + 1];
             memclr(str,size + 1,0);
