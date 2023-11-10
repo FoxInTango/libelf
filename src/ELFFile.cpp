@@ -33,19 +33,35 @@ ELFFile::ELFFile(const char* path){
 ELFFile::~ELFFile(){}
 #include <stdlib.h>
 #include <stdio.h>
+
+/**
+ *    0111011101111111011110
+ */
 size_t str_split(char* buffer,const size_t& length,char** strs,const size_t& strs_size){
     size_t index = 0;
     size_t count = 0;
 
-    while(index < length && count < strs_size){
-        unsigned char last = 0;
+    for(index; index < length; index++){
+        if(buffer[index] != '\0') break;
+    }
 
-        if(last == 0 && buffer[index] != 0){
+    if(index == 0){
+        strs[0] = &buffer[index];
+        count ++;
+
+        for (index; index < length; index++) {
+            if (buffer[index] != '\0') break;
+        }
+    }
+
+    if(index >= length) return count;
+
+    while(index < length && count < strs_size){
+        if(buffer[index] != '\0' && buffer[index - 1] == '\0'){
             strs[count] = &buffer[index];
             count ++;
         }
 
-        last = buffer[index];
         index ++;
     }
 
@@ -217,7 +233,7 @@ int ELFFile::open(const char* path){
         
         for(int i = 0;i < strtab_size;i ++){
             if(strtab[i] == 0){
-                printf("----\n");
+                printf("--");
             }else{
                 printf("%c",strtab[i]);
             }
@@ -225,7 +241,7 @@ int ELFFile::open(const char* path){
 
         for (int i = 0; i < shstrtab_size; i++) {
             if (shstrtab[i] == 0) {
-                printf("----\n");
+                printf("--");
             }
             else {
                 printf("%c", shstrtab[i]);
