@@ -51,6 +51,7 @@ size_t str_split(char* buffer,const size_t& length,char** strs,const size_t& str
 
     return str_count;
 }
+
 int ELFFile::open(const char* path){
     unsigned char endian = (unsigned char)(CurrentEndian());
 
