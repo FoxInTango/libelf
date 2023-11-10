@@ -75,6 +75,8 @@ int ELFFile::open(const char* path){
     // 参考 https://www.cnblogs.com/jiqingwu/p/elf_explore_2.html
     //      https://github.com/ARM-software/abi-aa/blob/main/aaelf32/aaelf32.rst
 
+    // 静态库 格式 ： https://zhuanlan.zhihu.com/p/24885933
+
     /* e_type
      
      ET_NONE, 0, No file type
