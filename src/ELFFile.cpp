@@ -204,13 +204,13 @@ int ELFFile::open(const char* path){
 
         char* symtab = new char[symtab_size + 1];
         char* strtab = new char[strtab_size + 1];
-        char* shstrtab = new char[shstrtab_size];
+        char* shstrtab = new char[shstrtab_size + 1];
 
         fseek(file,symtab_off, SEEK_SET);
         fread(symtab,1,symtab_size,file);
 
         fseek(file, strtab_off, SEEK_SET);
-        fread(strtab, 1, shstrtab_size, file);
+        fread(strtab, 1, strtab_size, file);
 
         fseek(file, shstrtab_off, SEEK_SET);
         fread(shstrtab, 1, shstrtab_size, file);
