@@ -43,7 +43,7 @@ size_t str_split(char* buffer,const size_t& length,char** strs,const size_t& str
             if(size > 0){
                 char* str = new char[size + 1];
                 memclr(str, size + 1, 0);
-                string_copy(str, buffer + offset, size);
+                string_copy<char>(str, buffer + offset, size);
                 strs[str_count] = str;
             } else {
                 strs[str_count] = 0;
