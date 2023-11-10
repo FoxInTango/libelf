@@ -40,7 +40,7 @@ size_t str_split(char* buffer,const size_t& length,char** strs,const size_t& str
     while(index < length && count < strs_size){
         unsigned char last = 0;
 
-        if(last == 0){
+        if(last == 0 && buffer[index] != 0){
             strs[count] = &buffer[index];
             count ++;
         }
