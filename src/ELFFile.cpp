@@ -148,7 +148,7 @@ int ELFFile::open(const char* path){
         fread(&e_phnum, 1, 2, file);
         fread(&e_shentsize, 1, 2, file);
         fread(&e_shnum,  1, 2, file);
-        fread(&e_phentsize, 1, 2, file);
+        fread(&e_shstrndx, 1, 2, file);
 
         // 处理字节序
         /*
@@ -162,7 +162,7 @@ int ELFFile::open(const char* path){
             e_phnum     = endianSwap16u(e_phnum);
             e_shentsize = endianSwap16u(e_shentsize);
             e_shnum     = endianSwap16u(e_shnum);
-            e_phentsize = endianSwap16u(e_phentsize);
+            e_shstrndx  = endianSwap16u(e_shstrndx);
         }*/
         printf("elf_magic:     %c%c%c%c\n", e_ident[0], e_ident[1], e_ident[2], e_ident[3]);
         printf("elf_bitwide:   %d\n", (int)e_ident[4]);
@@ -176,7 +176,7 @@ int ELFFile::open(const char* path){
         printf("elf_phnum:     %d\n", e_phnum);
         printf("elf_shentsize: %d\n", e_shentsize);
         printf("elf_shnum:     %d\n", e_shnum);
-        printf("elf_phentsize: %d\n", e_phentsize);
+        printf("elf_shstrndx:  %d\n", e_shstrndx);
         size_t symtab_off = 0x000a0c;
         size_t strtab_off = 0x000d0c;
         size_t shstrtab_off = 0x0010d4;
