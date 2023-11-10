@@ -204,7 +204,7 @@ int ELFFile::open(const char* path){
 
         char** shstrs = new char* [128];
         size_t shstr_count = str_split(shstrtab, shstrtab_size, shstrs, 128);
-        /*
+        
         for(int i = 0;i < str_count;i ++){
             printf("str %d : size: %u -- %s \n",i, string_length<char>(strs[i]),strs[i]);
         }
@@ -212,7 +212,7 @@ int ELFFile::open(const char* path){
         for (int i = 0; i < shstr_count; i++) {
             printf("shstr %d : size: %u -- %s \n\n", i, string_length<char>(shstrs[i]), shstrs[i]);
         }
-        */
+        /**/
 
         /*
         for(int i = 0;i < strtab_size;i ++){
