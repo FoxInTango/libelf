@@ -254,6 +254,7 @@ int ELFFile::open(const char* path){
         if(e_phnum){
             // 32位
             fseek(file,e_phoff,0);
+
             if(e_ident[4] == 1){
                 for(int i = 0;i < e_phnum;i ++){
                     Elf32_Phdr ph;
@@ -315,6 +316,8 @@ int ELFFile::open(const char* path){
                     default: {
                         if (ph.p_type >= PT_LOPROC && ph.p_type <= PT_HIPROC) {
                             printf("    Section Type: %s  ", p_type_s_proc);
+                        } else{
+                            printf("Section Type Value %u : %",ph.p_type);
                         }
                     }break;
                     }
