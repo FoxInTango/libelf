@@ -291,7 +291,7 @@ int ELFFile::open(const char* path){
             // 64位
                 for (int i = 0; i < e_phnum; i++) {
                     Elf64_Phdr ph;
-                    fread(&ph, 1, sizeof(Elf32_Phdr), file);
+                    fread(&ph, 1, sizeof(Elf64_Phdr), file);
                     printf("Program Header %d :\n", i);
                     char* p_type_s_null = "PT_NULL";
                     char* p_type_s_load = "PT_LOAD";
@@ -304,13 +304,13 @@ int ELFFile::open(const char* path){
                     char* p_type_s_proc = "PT_PROC";//PT_LOPROC, PT_HIPROC
 
                     switch (ph.p_type) {
-                    case PT_NULL: {printf("    Section Type: %s  ", p_type_s_null);    }break;
-                    case PT_LOAD: {printf("    Section Type: %s  ", p_type_s_load);    }break;
-                    case PT_DYNAMIC: {printf("    Section Type: %s  ", p_type_s_dynamic); }break;
-                    case PT_INTERP: {printf("    Section Type: %s  ", p_type_s_interp);  }break;
-                    case PT_NOTE: {printf("    Section Type: %s  ", p_type_s_note);    }break;
-                    case PT_SHLIB: {printf("    Section Type: %s  ", p_type_s_shlib);   }break;
-                    case PT_PHDR: {printf("    Section Type: %s  ", p_type_s_phdr);    }break;
+                    case PT_NULL:      {printf("    Section Type: %s  ", p_type_s_null);    }break;
+                    case PT_LOAD:      {printf("    Section Type: %s  ", p_type_s_load);    }break;
+                    case PT_DYNAMIC:   {printf("    Section Type: %s  ", p_type_s_dynamic); }break;
+                    case PT_INTERP:    {printf("    Section Type: %s  ", p_type_s_interp);  }break;
+                    case PT_NOTE:      {printf("    Section Type: %s  ", p_type_s_note);    }break;
+                    case PT_SHLIB:     {printf("    Section Type: %s  ", p_type_s_shlib);   }break;
+                    case PT_PHDR:      {printf("    Section Type: %s  ", p_type_s_phdr);    }break;
                     case PT_GNU_STACK: {printf("    Section Type: %s  ", p_type_s_stack);   }break;
                     default: {
                         if (ph.p_type >= PT_LOPROC && ph.p_type <= PT_HIPROC) {
