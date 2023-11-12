@@ -306,7 +306,7 @@ int ELFFile::open(const char* path){
             // 64位
                 for (int i = 0; i < e_phnum; i++) {
                     Elf64_Phdr_t ph;
-                    fread(&ph, 1, sizeof(Elf64_Phdr_t), file);
+                    fread(&ph,sizeof(Elf64_Phdr_t),1, file);
                     printf("Program Header %d :\n", i);
                     char* p_type_s_null = "PT_NULL";
                     char* p_type_s_load = "PT_LOAD";
