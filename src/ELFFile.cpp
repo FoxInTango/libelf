@@ -250,6 +250,51 @@ int ELFFile::open(const char* path){
             }
         }
         */
+        // program headers https://man7.org/linux/man-pages/man5/elf.5.html
+        if(e_phnum){
+            // 32位
+            fseek(file,e_phoff,0);
+            if(e_ident[4] == 1){
+                for(int i = 0;i < e_phnum;i ++){
+                    Elf32_Phdr ph;
+                    fread(&ph,1,sizeof(Elf32_Phdr),file);
+                    printf("Program Header %d :\n",i);
+                    char* p_type_s_null    = "PT_NULL";
+                    char* p_type_s_load    = "PT_LOAD";
+                    char* p_type_s_dynamic = "PT_DYNAMIC";
+                    char* p_type_s_interp  = "PT_INTERP";
+                    char* p_type_s_note    = "PT_NOTE";
+                    char* p_type_s_shlib   = "PT_SHLIB";
+                    char* p_type_s_phdr    = "PT_PHDR";
+                    char* p_type_s_stack   = "PT_GNU_STACK";
+                    char* p_type_s_proc    = "PT_PROC";//PT_LOPROC, PT_HIPROC
+
+                    switch(ph.p_type){
+                    case PT_NULL:      {printf("    Section Type: %s  ", p_type_s_null);    }break;
+                    case PT_LOAD:      {printf("    Section Type: %s  ", p_type_s_load);    }break;
+                    case PT_DYNAMIC:   {printf("    Section Type: %s  ", p_type_s_dynamic); }break;
+                    case PT_INTERP:    {printf("    Section Type: %s  ", p_type_s_interp);  }break;
+                    case PT_NOTE:      {printf("    Section Type: %s  ", p_type_s_note);    }break;
+                    case PT_SHLIB:     {printf("    Section Type: %s  ", p_type_s_shlib);   }break;
+                    case PT_PHDR:      {printf("    Section Type: %s  ", p_type_s_phdr);    }break;
+                    case PT_GNU_STACK: {printf("    Section Type: %s  ", p_type_s_stack);   }break;
+                    default:{
+                        if(ph.p_type >= PT_LOPROC && ph.p_type <= PT_HIPROC){
+                            printf("    Section Type: %s  ", p_type_s_proc);
+                        }
+                    }break;
+                    }
+                }
+
+                printf("\n");
+            } else {
+            // 64位
+                Elf64_Phdr ph;
+                fread(&ph, 1, sizeof(Elf32_Phdr), file);
+            }
+        }
+        // section headers https://man7.org/linux/man-pages/man5/elf.5.html
+
         fclose(file);
         return 1;
     }
