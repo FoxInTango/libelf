@@ -317,7 +317,7 @@ int ELFFile::open(const char* path){
                         if (ph.p_type >= PT_LOPROC && ph.p_type <= PT_HIPROC) {
                             printf("    Section Type: %s  ", p_type_s_proc);
                         } else{
-                            printf("Section Type Value %u : %",ph.p_type);
+                            printf("    Section Type Value %u : %",ph.p_type);
                         }
                     }break;
                     }
