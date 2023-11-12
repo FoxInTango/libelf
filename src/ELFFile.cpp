@@ -286,9 +286,11 @@ int ELFFile::open(const char* path){
                         }
                     }break;
                     }
+
+                    printf("\n");
                 }
 
-                printf("\n");
+                
             } else {
             // 64位
                 for (int i = 0; i < e_phnum; i++) {
@@ -322,9 +324,9 @@ int ELFFile::open(const char* path){
                         }
                     }break;
                     }
-                }
 
-                printf("\n");
+                    printf("\n");
+                }
             }
         }
         // section headers https://man7.org/linux/man-pages/man5/elf.5.html
