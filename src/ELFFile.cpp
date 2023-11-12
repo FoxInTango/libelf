@@ -68,6 +68,17 @@ size_t str_split(char* buffer,const size_t& length,char** strs,const size_t& str
 return count;
 }
 
+typedef struct {
+    uint32_t   p_type;
+    uint32_t   p_flags;
+    Elf64_Off  p_offset;
+    Elf64_Addr p_vaddr;
+    Elf64_Addr p_paddr;
+    uint64_t   p_filesz;
+    uint64_t   p_memsz;
+    uint64_t   p_align;
+} Elf64_Phdr_t;
+
 int ELFFile::open(const char* path){
     unsigned char endian = (unsigned char)(CurrentEndian());
 
@@ -294,8 +305,8 @@ int ELFFile::open(const char* path){
             } else {
             // 64位
                 for (int i = 0; i < e_phnum; i++) {
-                    Elf64_Phdr ph;
-                    fread(&ph, 1, sizeof(Elf64_Phdr), file);
+                    Elf64_Phdr_t ph;
+                    fread(&ph, 1, sizeof(Elf64_Phdr_t), file);
                     printf("Program Header %d :\n", i);
                     char* p_type_s_null = "PT_NULL";
                     char* p_type_s_load = "PT_LOAD";
