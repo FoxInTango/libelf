@@ -193,7 +193,7 @@ int ELFFile::open(const char* path){
         printf("elf_ehsize:    %d\n", e_ehsize);
         printf("elf_phentsize: %d\n", e_phentsize);
         printf("elf_phnum:     %d\n", e_phnum);
-        printf("elf_shentsize: %d sizeof(Elf64_Phdr): %u\n", e_shentsize, sizeof(Elf64_Phdr));
+        printf("elf_shentsize: %d\n", e_shentsize);
         printf("elf_shnum:     %d\n", e_shnum);
         printf("elf_shstrndx:  %d\n", e_shstrndx);
         size_t symtab_off = 0x000a0c;
