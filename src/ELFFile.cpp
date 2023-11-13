@@ -360,6 +360,10 @@ int ELFFile::open(const char* path){
                             fread(strbuf, 1, sh.sh_size, file);
                             char** strs = new char* [128];
                             size_t str_count = str_split(strbuf, sh.sh_size, strs, 128);
+                            for (int i = 0; i < str_count; i++) {
+                                printf("str   %d : size: %u -- %s \n", i, string_length<char>(strs[i]), strs[i]);
+                            }
+                            /*
                             if(SHF_ALLOC & sh.sh_flags){
                                 // strtab
                                 for (int i = 0; i < str_count; i++) {
@@ -370,7 +374,7 @@ int ELFFile::open(const char* path){
                                 for (int i = 0; i < str_count; i++) {
                                     printf("shstr %d : size: %u -- %s \n", i, string_length<char>(strs[i]), strs[i]);
                                 }
-                            }
+                            }*/
                         }break;
                     }
                 }
