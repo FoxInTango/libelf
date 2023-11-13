@@ -361,7 +361,8 @@ int ELFFile::open(const char* path){
                             char** strs = new char* [128];
                             size_t str_count = str_split(strbuf, sh.sh_size, strs, 128);
                             
-                            if(SHF_ALLOC & sh.sh_flags){
+                            //if(SHF_ALLOC & sh.sh_flags){
+                            if(e_shstrndx == i ){
                                 // strtab
                                 for (int i = 0; i < str_count; i++) {
                                     printf("str   %d : size: %u -- %s \n", i, string_length<char>(strs[i]), strs[i]);
