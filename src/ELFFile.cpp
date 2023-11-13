@@ -375,7 +375,10 @@ int ELFFile::open(const char* path){
                                     printf("shstr %d : size: %u -- %s \n", i, string_length<char>(strs[i]), strs[i]);
                                 }
                             }*/
+                            delete[] strbuf;
+                            delete[] strs;
                         }break;
+                    default:{}break;
                     }
                 }
             }
