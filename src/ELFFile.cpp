@@ -391,6 +391,30 @@ int ELFFile::open(const char* path){
                             delete[] strbuf;
                             delete[] strs;
                         }break;
+                        case 40: {
+                            char* strbuf = new char[sh.sh_size + 1];
+                            fseek(file, sh.sh_offset, SEEK_SET);
+                            fread(strbuf, 1, sh.sh_size, file);
+                            char** strs = new char* [128];
+                            size_t str_count = str_split(strbuf, sh.sh_size, strs, 128);
+                            for (int i = 0; i < str_count; i++) {
+                                printf("shstr   %d : size: %u -- %s \n", i, string_length<char>(strs[i]), strs[i]);
+                            }
+                            /*
+                            if(SHF_ALLOC & sh.sh_flags){
+                                // strtab
+                                for (int i = 0; i < str_count; i++) {
+                                    printf("str   %d : size: %u -- %s \n", i, string_length<char>(strs[i]), strs[i]);
+                                }
+                            } else {
+                                // shstrtab
+                                for (int i = 0; i < str_count; i++) {
+                                    printf("shstr %d : size: %u -- %s \n", i, string_length<char>(strs[i]), strs[i]);
+                                }
+                            }*/
+                            delete[] strbuf;
+                            delete[] strs;
+                        }break;
                     default:{}break;
                     }
                 }
