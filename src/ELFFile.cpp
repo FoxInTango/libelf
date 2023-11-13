@@ -207,6 +207,8 @@ int ELFFile::open(const char* path){
         printf("elf_shentsize: %d\n", e_shentsize);
         printf("elf_shnum:     %d\n", e_shnum);
         printf("elf_shstrndx:  %d\n", e_shstrndx);
+
+        /*
         size_t symtab_off = 0x000a0c;
         size_t strtab_off = 0x000d0c;
         size_t shstrtab_off = 0x0010d4;
@@ -241,7 +243,7 @@ int ELFFile::open(const char* path){
         for (int i = 0; i < shstr_count; i++) {
             printf("shstr %d : size: %u -- %s \n", i, string_length<char>(shstrs[i]), shstrs[i]);
         }
-        /**/
+        */
 
         /*
         for(int i = 0;i < strtab_size;i ++){
