@@ -352,6 +352,27 @@ int ELFFile::open(const char* path){
                     fread(&sh, sizeof(Elf32_Shdr), 1, file);
                     printf("Section Header %d :\n", i);
                     printf("    Section Type Value: %d \n",sh.sh_type);
+
+                    switch(sh.sh_type){
+                        case SHT_STRTAB:{
+                            char* strbuf = new char[sh.sh_size + 1];
+                            fseek(file, sh.sh_offset, SEEK_SET);
+                            fread(strbuf, 1, sh.sh_size, file);
+                            char** strs = new char* [128];
+                            size_t str_count = str_split(strbuf, sh.sh_size, strs, 128);
+                            if(SHF_ALLOC & sh.sh_flags){
+                                // strtab
+                                for (int i = 0; i < str_count; i++) {
+                                    printf("str   %d : size: %u -- %s \n", i, string_length<char>(strs[i]), strs[i]);
+                                }
+                            } else {
+                                // shstrtab
+                                for (int i = 0; i < str_count; i++) {
+                                    printf("shstr %d : size: %u -- %s \n", i, string_length<char>(strs[i]), strs[i]);
+                                }
+                            }
+                        }break;
+                    }
                 }
             }
             else {
