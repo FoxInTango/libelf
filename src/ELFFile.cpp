@@ -342,27 +342,14 @@ int ELFFile::open(const char* path){
                 }
             }
         }
-
-        typedef struct {
-            uint32_t   sh_name;
-            uint32_t   sh_type;
-            uint32_t   sh_flags;
-            Elf32_Addr sh_addr;
-            Elf32_Off  sh_offset;
-            uint32_t   sh_size;
-            uint32_t   sh_link;
-            uint32_t   sh_info;
-            uint32_t   sh_addralign;
-            uint32_t   sh_entsize;
-        } Elf32_Shdr_t;
         // section headers https://man7.org/linux/man-pages/man5/elf.5.html
         if (e_shnum) {
             // 32位
-            fseek(file, e_shoff, 0);
             if (e_ident[4] == 1) {
                 for (int i = 0; i < e_shnum; i++) {
-                    Elf32_Shdr_t sh;
-                    fread(&sh, sizeof(Elf32_Shdr_t), 1, file);
+                    Elf32_Shdr sh;
+                    fseek(file, e_shoff + i * e_shentsize, 0);
+                    fread(&sh, sizeof(Elf32_Shdr), 1, file);
                     printf("Section Header %d :\n", i);
                     printf("    Section Type Value: %d \n",sh.sh_type);
 
@@ -422,6 +409,7 @@ int ELFFile::open(const char* path){
             else {
                 for (int i = 0; i < e_shnum; i++) {
                     Elf64_Shdr sh;
+                    fseek(file, e_shoff + i * e_shentsize, 0);
                     fread(&sh, sizeof(Elf64_Shdr), 1, file);
                     printf("Section Header %d :\n", i);
                     printf("    Section Type Value: %d \n", sh.sh_type);
