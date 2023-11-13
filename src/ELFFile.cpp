@@ -361,8 +361,8 @@ int ELFFile::open(const char* path){
                             char** strs = new char* [128];
                             size_t str_count = str_split(strbuf, sh.sh_size, strs, 128);
                             
-                            //if(SHF_ALLOC & sh.sh_flags){
-                            if(e_shstrndx == i ){
+                            //if(SHF_ALLOC & sh.sh_flags){ https://cloud.tencent.com/developer/ask/sof/107910468 您可以通过从ELF头读取e_shstrndx来安全地识别它--这个字段包含保存节头字符串表的节的索引。
+                            if(e_shstrndx == i + 1 ){
                                 // strtab
                                 for (int i = 0; i < str_count; i++) {
                                     printf("str   %d : size: %u -- %s \n", i, string_length<char>(strs[i]), strs[i]);
