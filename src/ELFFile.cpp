@@ -351,14 +351,20 @@ int ELFFile::open(const char* path){
                     Elf32_Shdr sh;
                     fread(&sh, sizeof(Elf32_Shdr), 1, file);
                     printf("Section Header %d :\n", i);
-                } else {
+                    printf("    Section Type Value: %d \n",sh.sh_type);
+                }
+            }
+            else {
+                for (int i = 0; i < e_shnum; i++) {
                     Elf64_Shdr sh;
                     fread(&sh, sizeof(Elf64_Shdr), 1, file);
                     printf("Section Header %d :\n", i);
+                    printf("    Section Type Value: %d \n", sh.sh_type);
                 }
             }
 
         }
+
         fclose(file);
         return 1;
     }
