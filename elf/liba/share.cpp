@@ -6,6 +6,7 @@ char d = 'g';
 void* p = (void*)0x10838;
 int add(){
     a = 0;
+    e_var = 100;
     /*
     b = 32;
     c = 'a';
