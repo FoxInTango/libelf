@@ -1,3 +1,4 @@
+extern int e_var;
 class Share {
 private:
     int tShare;
