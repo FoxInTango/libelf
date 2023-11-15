@@ -18,3 +18,5 @@ https://forums.freertos.org/t/dynamic-loader/12865/6
 https://ourembeddeds.github.io/blog/2020/08/16/elf-loader/
 
 https://www.cnblogs.com/jiqingwu/p/elf_format_research_01.html
+
+https://llvm.org/doxygen/BinaryFormat_2ELF_8h_source.html

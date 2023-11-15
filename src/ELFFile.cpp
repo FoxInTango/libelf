@@ -80,6 +80,18 @@ typedef struct {
 } Elf64_Phdr_t;
 
 int ELFFile::open(const char* path){
+    /** 验证文件有效性
+     * 1,ELF
+     *   7f 45 4c 46
+     *   bitwide 是否符合当前需要
+     *   endian  是否符合当前需要
+     * 2,
+     */
+    /**
+     * delete header
+     * delete segments
+     * delete sections
+     */
     unsigned char endian = (unsigned char)(CurrentEndian());
 
     FILE* file = fopen(path,"r");
@@ -91,24 +103,24 @@ int ELFFile::open(const char* path){
     /* e_type
      
      ET_NONE, 0, No file type
-     ET_REL, 1, Relocatable file（可重定位文件，通常是文件名以.o结尾，目标文件）
+     ET_REL,  1, Relocatable file（可重定位文件，通常是文件名以.o结尾，目标文件）
      ET_EXEC, 2, Executable file （可执行文件）
-     ET_DYN, 3, Shared object file （动态库文件，你用gcc编译出的二进制往往也属于这种类型，惊讶吗？）
+     ET_DYN,  3, Shared object file （动态库文件，你用gcc编译出的二进制往往也属于这种类型，惊讶吗？）
      ET_CORE, 4, Core file （core文件，是core dump生成的吧？）
-     ET_NUM, 5，表示已经定义了5种文件类型
+     ET_NUM,  5，表示已经定义了5种文件类型
      ET_LOPROC, 0xff00, Processor-specific
      ET_HIPROC, 0xffff, Processor-specific
      */
 
     /* e_machine
-     EM_NONE, 0, No machine
-     EM_M32, 1, AT&T WE 32100
+     EM_NONE,  0, No machine
+     EM_M32,   1, AT&T WE 32100
      EM_SPARC, 2, SPARC
-     EM_386, 3, Intel 80386
-     EM_68K, 4, Motorola 68000
-     EM_88K, 5, Motorola 88000
-     EM_860, 7, Intel 80860
-     EM_MIPS, 8, MIPS RS3000
+     EM_386,   3, Intel 80386
+     EM_68K,   4, Motorola 68000
+     EM_88K,   5, Motorola 88000
+     EM_860,   7, Intel 80860
+     EM_MIPS,  8, MIPS RS3000
      */
     unsigned char	e_ident[EI_NIDENT];
     uint16_t e_type;        //  2字节，描述了ELF文件的类型。
@@ -136,7 +148,7 @@ int ELFFile::open(const char* path){
         fread(&e_i_version,1, 1, file);
         */
         printf("ELF File %s loaded.\n",path);
-
+      
         char* e_entry_string = 0;
         char* e_phoff_string = 0;
         char* e_shoff_string = 0;
