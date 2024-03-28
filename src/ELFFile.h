@@ -1,6 +1,7 @@
 #ifndef _LIB_ELF_FILE_H_
 #define _LIB_ELF_FILE_H_
 #include <libcpp/libcpp.h>
+
 EXTERN_C_BEGIN
 namespaceBegin(foxintango)
 
@@ -36,8 +37,8 @@ public:
     unsigned char* m_content;
     Array<unsigned char*> m_strings;
 };
-/** 64Î»ÎÊÌâ¿ÉÄÜÓÉÄÚ´æ¶ÔÆëÎÊÌâµ¼ÖÂ
- *  Öğ³ÉÔ±¶ÁÎÄ¼ş½ÏÎª±£ÏÕ 
+/** 64ä½é—®é¢˜å¯èƒ½ç”±å†…å­˜å¯¹é½é—®é¢˜å¯¼è‡´
+ *  é€æˆå‘˜è¯»æ–‡ä»¶è¾ƒä¸ºä¿é™© 
  */
 
 class foxintangoAPI ELFSegment{
@@ -123,11 +124,11 @@ public:
      */
     int load();
     /**
-     * 1,ÀàĞÍÅĞ¶Ï
-     * 2,¼ÓÔØÊı¾İ¶Î
-     * 3,¼ÓÔØ³ÌĞò¶Î
-     * 4,¼ÓÔØÒÀÀµ
-     * 5,ÄÚ²¿ÖØ¶¨Î»
+     * 1,ç±»å‹åˆ¤æ–­
+     * 2,åŠ è½½æ•°æ®æ®µ
+     * 3,åŠ è½½ç¨‹åºæ®µ
+     * 4,åŠ è½½ä¾èµ–
+     * 5,å†…éƒ¨é‡å®šä½
      */
 
      /** 
