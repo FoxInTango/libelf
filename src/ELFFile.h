@@ -1,6 +1,7 @@
 #ifndef _LIB_ELF_FILE_H_
 #define _LIB_ELF_FILE_H_
 #include <libcpp/libcpp.h>
+#include <vector>
 
 EXTERN_C_BEGIN
 namespaceBegin(foxintango)
@@ -35,7 +36,7 @@ public:
 class foxintangoAPI ELFStringTable{
 public:
     unsigned char* m_content;
-    Array<unsigned char*> m_strings;
+    std::vector<unsigned char*> m_strings;
 };
 /** 64位问题可能由内存对齐问题导致
  *  逐成员读文件较为保险 
@@ -114,9 +115,9 @@ public:
     unsigned int shstrndx;//https://man7.org/linux/man-pages/man5/elf.5.html e_shstrndx
     ELFIdent ident;
     ELFHeader* header;
-    Array<ELFSegment*> segments;
-    Array<ELFSection*> sections;
-    Array<ELFStringTable*> stringTables;
+    std::vector<ELFSegment*> segments;
+    std::vector<ELFSection*> sections;
+    std::vector<ELFStringTable*> stringTables;
 public:
     int open(const char* path);
     /**
